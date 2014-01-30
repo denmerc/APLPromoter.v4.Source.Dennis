@@ -1,0 +1,137 @@
+<Application 
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:d1p1="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation" x:Class="APLPromoter.UI.Wpf.App" 
+             StartupUri="MainWindow.xaml" 
+             d1p1:Ignorable="d">
+
+
+    <Application.Resources>
+        <!--<vm:ViewModelLocator x:Key="Locator" d:IsDataSource="True" xmlns:vm="clr-namespace:APLPromoter.UI.Wpf.ViewModel" />-->
+
+        <!-- adding programmatically in app startup with same key-->
+        <Style x:Key="GridViewHeaderRowStyle1" TargetType="{x:Type telerik:GridViewHeaderRow}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type telerik:GridViewHeaderRow}">
+                        <telerik:SelectiveScrollingGrid>
+                            <telerik:SelectiveScrollingGrid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </telerik:SelectiveScrollingGrid.ColumnDefinitions>
+                            <telerik:SelectiveScrollingGrid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition/>
+                            </telerik:SelectiveScrollingGrid.RowDefinitions>
+                            <telerik:CommonHeaderPresenter Background="{x:Null}" x:Name="PART_CommonHeaderPresenter" Grid.Column="3" IsTabStop="False">
+                                <telerik:StyleManager.Theme>
+                                    <telerik:Windows8Theme/>
+                                </telerik:StyleManager.Theme>
+                            </telerik:CommonHeaderPresenter>
+                            <Border x:Name="CommonHeaderIndent" BorderBrush="#FF848484" BorderThickness="0,0,1,1" Background="#FF3B3B3B" Grid.ColumnSpan="2" Margin="-1,0,0,0" telerik:SelectiveScrollingGrid.SelectiveScrollingOrientation="Vertical" Visibility="{Binding Visibility, ElementName=PART_CommonHeaderPresenter}"/>
+                            <Grid x:Name="PART_OuterGrid" Grid.ColumnSpan="4" Grid.Row="1">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+                                <Border x:Name="PART_GridViewHeaderRowBorder" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Padding="{TemplateBinding Padding}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
+                                    <Border BorderBrush="#FF4B4B4B" BorderThickness="1" Background="{TemplateBinding Background}"/>
+                                </Border>
+                                <Border x:Name="PART_FieldFilterPlaceholder" BorderBrush="#FF848484" BorderThickness="0,0,1,1" Background="#FF3B3B3B" Grid.Row="1" Visibility="{TemplateBinding FieldFilterPlaceholderVisibility}"/>
+                            </Grid>
+                            <telerik:DataCellsPresenter x:Name="PART_DataCellsPresenter" Grid.Column="3" IsTabStop="False" Grid.Row="1">
+                                <telerik:StyleManager.Theme>
+                                    <telerik:Office_BlackTheme/>
+                                </telerik:StyleManager.Theme>
+                            </telerik:DataCellsPresenter>
+                            <Border x:Name="PART_IndicatorPresenter" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="0,0,1,1" Grid.Row="1" telerik:SelectiveScrollingGrid.SelectiveScrollingOrientation="Vertical" Visibility="{TemplateBinding RowIndicatorVisibility}" Width="25">
+                                <Border BorderBrush="#FF4B4B4B" BorderThickness="1">
+                                    <Border.Background>
+                                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                            <GradientStop Color="#FF5B5B5B" Offset="1"/>
+                                            <GradientStop Color="#FF868686"/>
+                                            <GradientStop Color="#FF4F4F4F" Offset="0.42"/>
+                                            <GradientStop Color="#FF0E0E0E" Offset="0.43"/>
+                                        </LinearGradientBrush>
+                                    </Border.Background>
+                                </Border>
+                            </Border>
+                            <telerik:IndentPresenter x:Name="PART_IndentPresenter" Grid.Column="1" IsTabStop="False" IndentLevel="{TemplateBinding IndentLevel}" MinHeight="{TemplateBinding MinHeight}" Grid.Row="1" telerik:SelectiveScrollingGrid.SelectiveScrollingOrientation="Vertical">
+                                <telerik:IndentPresenter.ItemTemplate>
+                                    <DataTemplate>
+                                        <telerik:GridViewHeaderIndentCell IsTabStop="False">
+                                            <telerik:StyleManager.Theme>
+                                                <telerik:Windows8Theme/>
+                                            </telerik:StyleManager.Theme>
+                                        </telerik:GridViewHeaderIndentCell>
+                                    </DataTemplate>
+                                </telerik:IndentPresenter.ItemTemplate>
+                                <telerik:StyleManager.Theme>
+                                    <telerik:Office_BlackTheme/>
+                                </telerik:StyleManager.Theme>
+                            </telerik:IndentPresenter>
+                            <Border x:Name="PART_CommonHeaderHierarchyIndentPresenterAllLevels" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="0,0,1,1" Background="#FF3B3B3B" Grid.Column="2" Grid.Row="0" Grid.RowSpan="10" telerik:SelectiveScrollingGrid.SelectiveScrollingOrientation="Vertical" Width="25">
+                                <Border.Visibility>
+                                    <Binding Path="HasHierarchy" RelativeSource="{RelativeSource TemplatedParent}">
+                                        <Binding.Converter>
+                                            <telerik:BooleanToVisibilityConverter/>
+                                        </Binding.Converter>
+                                    </Binding>
+                                </Border.Visibility>
+                            </Border>
+                            <Border x:Name="PART_CommonHeaderHierarchyIndentPresenterFirstLevel" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="0,0,1,1" Background="#FF3B3B3B" Grid.Column="2" Margin="0,-1,0,0" Grid.Row="0" Grid.RowSpan="1" telerik:SelectiveScrollingGrid.SelectiveScrollingOrientation="Vertical" Width="25">
+                                <Border.Visibility>
+                                    <Binding Path="HasHierarchy" RelativeSource="{RelativeSource TemplatedParent}">
+                                        <Binding.Converter>
+                                            <telerik:BooleanToVisibilityConverter/>
+                                        </Binding.Converter>
+                                    </Binding>
+                                </Border.Visibility>
+                            </Border>
+                            <Border x:Name="PART_HierarchyIndentPresenter" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="0,0,1,1" Grid.Column="2" Grid.Row="1" telerik:SelectiveScrollingGrid.SelectiveScrollingOrientation="Vertical" Width="25">
+                                <Border.Visibility>
+                                    <Binding Path="HasHierarchy" RelativeSource="{RelativeSource TemplatedParent}">
+                                        <Binding.Converter>
+                                            <telerik:BooleanToVisibilityConverter/>
+                                        </Binding.Converter>
+                                    </Binding>
+                                </Border.Visibility>
+                                <Border BorderBrush="#FF4B4B4B" BorderThickness="1">
+                                    <Border.Background>
+                                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                            <GradientStop Color="#FF5B5B5B" Offset="1"/>
+                                            <GradientStop Color="#FF868686"/>
+                                            <GradientStop Color="#FF4F4F4F" Offset="0.42"/>
+                                            <GradientStop Color="#FF0E0E0E" Offset="0.43"/>
+                                        </LinearGradientBrush>
+                                    </Border.Background>
+                                </Border>
+                            </Border>
+                        </telerik:SelectiveScrollingGrid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Background">
+                <Setter.Value>
+                    <SolidColorBrush Color="White"></SolidColorBrush>
+                    <!--<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FF5B5B5B" Offset="1"/>
+                        <GradientStop Color="#FF868686"/>
+                        <GradientStop Color="#FF4F4F4F" Offset="0.42"/>
+                        <GradientStop Color="#FF0E0E0E" Offset="0.43"/>
+                    </LinearGradientBrush>-->
+                </Setter.Value>
+            </Setter>
+            <Setter Property="MinHeight" Value="27"/>
+            <Setter Property="BorderBrush" Value="#FF848484"/>
+            <Setter Property="BorderThickness" Value="1,0,0,1"/>
+            <Setter Property="VerticalContentAlignment" Value="Stretch"/>
+            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+            <Setter Property="Padding" Value="0"/>
+            <Setter Property="SnapsToDevicePixels" Value="True"/>
+        </Style>
+    </Application.Resources>
+</Application>  

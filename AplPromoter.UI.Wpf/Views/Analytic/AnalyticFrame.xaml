@@ -1,0 +1,437 @@
+﻿<UserControl x:Class="APLPromoter.UI.Wpf.Views.AnalyticFrame"
+                xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d"
+             d:DesignHeight="600" d:DesignWidth="700">
+    <UserControl.Resources>
+        <Style x:Key="title_style" TargetType="TextBlock">
+            <Setter Property="Foreground" Value="#1fa3eb" />
+            <Setter Property="FontSize" Value="24" />
+            <Setter Property="FontWeight" Value="Light" />
+        </Style>
+        <Style TargetType="TextBlock" x:Key="textBlock_info">
+            <Setter Property="Foreground" Value="#FF7C7C7C" />
+            <Setter Property="FontWeight" Value="Bold" />
+            <Setter Property="FontSize" Value="12" />
+            <Setter Property="FontFamily" Value="Segoe UI" />
+        </Style>
+        <Style TargetType="TextBlock" x:Key="textBlock_number">
+            <Setter Property="Foreground" Value="#FF7C7C7C" />
+            <Setter Property="FontSize" Value="21" />
+            <Setter Property="FontFamily" Value="Segoe UI" />
+        </Style>
+        <Style TargetType="TextBlock" x:Key="title_style_info">
+            <Setter Property="Foreground" Value="#25a0da" />
+            <Setter Property="FontWeight" Value="Bold" />
+            <Setter Property="FontSize" Value="12" />
+            <Setter Property="FontFamily" Value="Segoe UI" />
+        </Style>
+        <Style TargetType="TextBlock" x:Key="style_info">
+            <Setter Property="Foreground" Value="#333" />
+            <Setter Property="Margin" Value="0 0 0 5" />
+            <Setter Property="FontSize" Value="12" />
+            <Setter Property="FontFamily" Value="Segoe UI" />
+        </Style>
+        <Style TargetType="telerik:RadTileView">
+            <Setter Property="PreservePositionWhenMaximized" Value="True" />
+            <Setter Property="telerik:TileViewPanel.IsVirtualized" Value="True" />
+            <Setter Property="IsAutoScrollingEnabled" Value="True" />
+            <Setter Property="TileStateChangeTrigger" Value="SingleClick" />
+            <Setter Property="MinimizedColumnWidth" Value="150" />
+            <Setter Property="MinimizedRowHeight" Value="150" />
+            <Setter Property="RowHeight" Value="200" />
+            <Setter Property="ColumnWidth" Value="*" />
+            <Setter Property="ColumnsCount" Value="2" />
+            <Setter Property="MaximizeMode" Value="One"/>
+        </Style>
+
+    </UserControl.Resources>
+    <Grid>
+
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        <telerik:RadTileView>
+
+
+
+
+
+
+
+
+
+            <telerik:RadTileViewItem Header="Analytic Detail" x:Name="AnalyticEdit">
+                <Grid Margin="5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <TextBlock
+				       Height="80"
+                       Width="80"
+				       TextAlignment="Center"
+                        VerticalAlignment="Top"
+                        Padding="0,0,0,0"
+                        Margin="20,0,41,0"
+				       
+				       Text="A" FontSize="72" FontWeight="Bold" />
+                    <StackPanel Grid.Column="1" Margin="0 15 0 30">
+                        <TextBlock Style="{StaticResource title_style}" Text="{Binding Name}" />
+                        <TextBlock Style="{StaticResource textBlock_info}" Text="Analytic Detail" FontSize="24" />
+                    </StackPanel>
+
+                    <Grid Grid.Row="1"
+				      Grid.Column="1"
+				      VerticalAlignment="Top">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="20" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="20" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="82" />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Style="{StaticResource title_style_info}"
+					           Text="Id:" />
+                        <TextBlock x:Name="xId"  Grid.Column="1"
+					           Style="{StaticResource style_info}"
+					           Text="{Binding Id}" />
+
+                        <TextBlock Grid.Row="1" 
+                               Style="{StaticResource title_style_info}"
+					           Text="Name:" />
+                        <TextBlock  x:Name="xName"   Grid.Row="1" Grid.Column="1"
+					           Style="{StaticResource style_info}"
+					           Text="{Binding Name}" />
+                        <TextBlock x:Name="xDescription"  Grid.Row="2"
+					           Style="{StaticResource title_style_info}"
+					           Text="Description:" />
+                        <TextBlock Grid.Row="2" Grid.Column="1"
+					           Style="{StaticResource style_info}"
+					           Text="{Binding Description}" />
+
+
+
+                        <TextBlock Grid.Row="3"
+					           Style="{StaticResource title_style_info}"
+					           Text="Author: " />
+                        <TextBlock Grid.Row="3" Grid.Column="1"
+					           Style="{StaticResource style_info}"
+					           Text="" />
+
+                        <TextBlock Grid.Row="4" 
+                               Style="{StaticResource title_style_info}"
+					           Text="Created:" />
+                        <TextBlock Grid.Row="4" Grid.Column="1"
+					           Style="{StaticResource style_info}"
+					           Text="" />
+
+                        <TextBlock Grid.Row="5" 
+                               Style="{StaticResource title_style_info}"
+					           Text="Owner:" />
+                        <TextBlock Grid.Row="5" Grid.Column="1"
+					           Style="{StaticResource style_info}"
+					           Text="" />
+
+                        <TextBlock Grid.Row="6" 
+                               Style="{StaticResource title_style_info}"
+					           Text="Edited:" />
+                        <TextBlock Grid.Row="6" Grid.Column="1"
+					           Style="{StaticResource style_info}"
+					           Text="" />
+
+                        <TextBlock Grid.Row="7" 
+                               Style="{StaticResource title_style_info}"
+					           Text="Active:" />
+                        <TextBlock Grid.Row="7" Grid.Column="1"
+					           Style="{StaticResource style_info}"
+					           Text="" />
+
+                    </Grid>
+
+                    <Grid Grid.Column="1" Grid.Row="2" 
+                      Margin="0 60 0 0" Width="340"
+                      HorizontalAlignment="Left">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <TextBlock Text="Statistics" Style="{StaticResource title_style}" Margin="0 0 0 15"/>
+                        <StackPanel Grid.Row="1">
+                            <TextBlock Text="101" Style="{StaticResource textBlock_number}"/>
+                            <TextBlock Text="No. oF Filters" Style="{StaticResource textBlock_info}"/>
+                        </StackPanel>
+                        <StackPanel Grid.Column="1" Grid.Row="1">
+                            <TextBlock Text="70" Style="{StaticResource textBlock_number}"/>
+                            <TextBlock Text="No. of Types" Style="{StaticResource textBlock_info}"/>
+                        </StackPanel>
+                        <StackPanel  Grid.Column="2" Grid.Row="1">
+                            <TextBlock Text="44" Style="{StaticResource textBlock_number}"/>
+                            <TextBlock Text="Sku Count" Style="{StaticResource textBlock_info}"/>
+                        </StackPanel>
+                    </Grid>
+
+                </Grid>
+
+            </telerik:RadTileViewItem>
+
+
+
+
+
+
+
+
+            <telerik:RadTileViewItem Header="Add Filters" x:Name="FilterEdit">
+                <Grid Margin="5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <TextBlock
+				       Height="80"
+                       Width="80"
+				       TextAlignment="Center"
+                        VerticalAlignment="Top"
+                        Padding="0,0,0,0"
+                        Margin="20,0,41,0"
+				       
+				       Text="F" FontSize="72" FontWeight="Bold" />
+                    <StackPanel Grid.Column="1" Margin="0 15 0 30">
+                        <TextBlock Style="{StaticResource title_style}" Text="{Binding Name}" />
+                        <TextBlock Style="{StaticResource textBlock_info}" Text="Filter List" FontSize="24" />
+                    </StackPanel>
+
+                    <Grid Grid.Row="1"
+				      Grid.Column="1"
+				      VerticalAlignment="Top">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <telerik:RadGridView x:Name="RadGridViewFilters" 
+                              GroupRenderMode="Flat"
+							 ItemsSource="{Binding Filters}"
+							 IsFilteringAllowed="False"
+							 AutoGenerateColumns="False"
+							 CanUserFreezeColumns="True"
+                                             MinWidth="500"
+							 MinHeight="386" MaxHeight="500" Width="748"
+                             ShowGroupPanel="False"
+							 FrozenColumnCount="{Binding Value, ElementName=RadSlider1, Mode=TwoWay}" HeaderRowStyle="{DynamicResource GridViewHeaderRowStyle1}" HorizontalAlignment="Left">
+                            <telerik:RadGridView.Columns>
+                                <telerik:GridViewDataColumn UniqueName="Id"
+											Header="ID"
+											IsGroupable="False" />
+                                <telerik:GridViewDataColumn UniqueName="Name"
+											Header="Name"
+											IsGroupable="False"
+											Width="200" />
+                                <telerik:GridViewDataColumn UniqueName="Description"
+											Header="Description"
+											IsGroupable="False"
+											Width="200" />
+                            </telerik:RadGridView.Columns>
+                        </telerik:RadGridView>
+
+                    </Grid>
+
+
+
+                </Grid>
+
+            </telerik:RadTileViewItem>
+
+
+            <telerik:RadTileViewItem Header ="Add Types" x:Name="TypeEdit">
+                <Grid Margin="5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <TextBlock
+				       Height="80"
+                       Width="80"
+				       TextAlignment="Center"
+                        VerticalAlignment="Top"
+                        Padding="0,0,0,0"
+                        Margin="20,0,41,0"
+				       
+				       Text="T" FontSize="72" FontWeight="Bold" />
+                    <StackPanel Grid.Column="1" Margin="0 15 0 30">
+                        <TextBlock Style="{StaticResource title_style}" Text="{Binding Name}" />
+                        <TextBlock Style="{StaticResource textBlock_info}" Text="Type List" FontSize="24" />
+                    </StackPanel>
+
+                    <Grid Grid.Row="1"
+				      Grid.Column="1"
+				      VerticalAlignment="Top">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <telerik:RadGridView x:Name="RadGridViewTypes" 
+                              GroupRenderMode="Flat"
+							 ItemsSource="{Binding Types}"
+							 IsFilteringAllowed="False"
+							 AutoGenerateColumns="False"
+							 CanUserFreezeColumns="True"
+                                             MinWidth="500"
+							 MinHeight="386" MaxHeight="500" Width="748"
+                             ShowGroupPanel="False"
+							 FrozenColumnCount="{Binding Value, ElementName=RadSlider1, Mode=TwoWay}" HeaderRowStyle="{DynamicResource GridViewHeaderRowStyle1}" HorizontalAlignment="Left">
+                            <telerik:RadGridView.Columns>
+                                <telerik:GridViewDataColumn UniqueName="Id"
+											Header="ID"
+											IsGroupable="False" />
+                                <telerik:GridViewDataColumn UniqueName="Name"
+											Header="Name"
+											IsGroupable="False"
+											Width="200" />
+                                <telerik:GridViewDataColumn UniqueName="Description"
+											Header="Description"
+											IsGroupable="False"
+											Width="200" />
+                            </telerik:RadGridView.Columns>
+                        </telerik:RadGridView>
+
+                    </Grid>
+
+
+
+                </Grid>
+
+            </telerik:RadTileViewItem>
+
+            <telerik:RadTileViewItem Header ="Results" x:Name="ResultEdit">
+                <Grid Margin="5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <TextBlock
+				       Height="80"
+                       Width="80"
+				       TextAlignment="Center"
+                        VerticalAlignment="Top"
+                        Padding="0,0,0,0"
+                        Margin="20,0,41,0"
+				       
+				       Text="R" FontSize="72" FontWeight="Bold" />
+                    <StackPanel Grid.Column="1" Margin="0 15 0 30">
+                        <TextBlock Style="{StaticResource title_style}" Text="{Binding Name}" />
+                        <TextBlock Style="{StaticResource textBlock_info}" Text="Result List" FontSize="24" />
+                    </StackPanel>
+
+                    <Grid Grid.Row="1"
+				      Grid.Column="1"
+				      VerticalAlignment="Top">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <telerik:RadGridView x:Name="RadGridViewResults" 
+                              GroupRenderMode="Flat"
+							 ItemsSource=""
+							 IsFilteringAllowed="False"
+							 AutoGenerateColumns="False"
+							 CanUserFreezeColumns="True"
+                                             MinWidth="500"
+							 MinHeight="386" MaxHeight="900" Width="748"
+                             ShowGroupPanel="False"
+							 FrozenColumnCount="{Binding Value, ElementName=RadSlider1, Mode=TwoWay}" HeaderRowStyle="{DynamicResource GridViewHeaderRowStyle1}" HorizontalAlignment="Left">
+                            <telerik:RadGridView.Columns>
+                                <telerik:GridViewDataColumn UniqueName="Id"
+											Header="ID"
+											IsGroupable="False" />
+                                <telerik:GridViewDataColumn UniqueName="Name"
+											Header="Name"
+											IsGroupable="False"
+											Width="200" />
+                                <telerik:GridViewDataColumn UniqueName="Description"
+											Header="Description"
+											IsGroupable="False"
+											Width="200" />
+                            </telerik:RadGridView.Columns>
+                        </telerik:RadGridView>
+
+                    </Grid>
+
+                    <Grid Grid.Column="1" Grid.Row="2" 
+                      Margin="0 60 0 0" Width="340"
+                      HorizontalAlignment="Left">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+
+                    </Grid>
+
+                </Grid>
+
+            </telerik:RadTileViewItem>
+        </telerik:RadTileView>
+    </Grid>
+</UserControl>

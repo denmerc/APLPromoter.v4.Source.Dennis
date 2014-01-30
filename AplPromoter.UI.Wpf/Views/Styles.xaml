@@ -1,0 +1,33 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Style x:Key="title_style" TargetType="TextBlock">
+        <Setter Property="Foreground" Value="#1fa3eb" />
+        <Setter Property="FontSize" Value="24" />
+        <Setter Property="FontFamily"
+					Value="/Telerik.Windows.QuickStartUITheme;component/Fonts/MyriadPro-Light.otf#Myriad Pro Light" />
+        <Setter Property="FontWeight" Value="Light" />
+    </Style>
+    <Style TargetType="TextBlock" x:Key="textBlock_info">
+        <Setter Property="Foreground" Value="#FF7C7C7C" />
+        <Setter Property="FontWeight" Value="Bold" />
+        <Setter Property="FontSize" Value="12" />
+        <Setter Property="FontFamily" Value="Segoe UI" />
+    </Style>
+    <Style TargetType="TextBlock" x:Key="textBlock_number">
+        <Setter Property="Foreground" Value="#FF7C7C7C" />
+        <Setter Property="FontSize" Value="21" />
+        <Setter Property="FontFamily" Value="Segoe UI" />
+    </Style>
+    <Style TargetType="TextBlock" x:Key="title_style_info">
+        <Setter Property="Foreground" Value="#25a0da" />
+        <Setter Property="FontWeight" Value="Bold" />
+        <Setter Property="FontSize" Value="12" />
+        <Setter Property="FontFamily" Value="Segoe UI" />
+    </Style>
+    <Style TargetType="TextBlock" x:Key="style_info">
+        <Setter Property="Foreground" Value="#333" />
+        <Setter Property="Margin" Value="0 0 0 5" />
+        <Setter Property="FontSize" Value="12" />
+        <Setter Property="FontFamily" Value="Segoe UI" />
+    </Style>
+</ResourceDictionary>
