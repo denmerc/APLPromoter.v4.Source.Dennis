@@ -253,9 +253,17 @@
       <Project>{015b7e94-08c0-49f2-bf6f-c90128514c35}</Project>
       <Name>APLPromoter.Client.Contracts</Name>
     </ProjectReference>
+    <ProjectReference Include="..\APLPromoter.Client.Entity\APLPromoter.Client.Entity.csproj">
+      <Project>{ccef668d-0d12-4649-bd79-abee22198699}</Project>
+      <Name>APLPromoter.Client.Entity</Name>
+    </ProjectReference>
     <ProjectReference Include="..\APLPromoter.Client\APLPromoter.Client.csproj">
       <Project>{b77fe627-bdbc-4848-8c17-3a0e13bc81e6}</Project>
       <Name>APLPromoter.Client</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\APLPromoter.Server.Services.Contracts\APLPromoter.Server.Services.Contracts.csproj">
+      <Project>{a5940d20-0105-4037-ace5-e941ec9ee5a7}</Project>
+      <Name>APLPromoter.Server.Services.Contracts</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

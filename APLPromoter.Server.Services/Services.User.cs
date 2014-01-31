@@ -6,9 +6,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.ServiceModel;
 
 namespace APLPromoter.Server.Services
 {
+    [ServiceBehavior(UseSynchronizationContext = false, 
+                    InstanceContextMode = InstanceContextMode.PerCall,
+                    ConcurrencyMode = ConcurrencyMode.Single)]
+    //[CallbackBehavior(UseSynchronizationContext = false)]
     public class UserService : IUserService
     {
         private IUserData _userData;

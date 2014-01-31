@@ -55,11 +55,11 @@ namespace APLPromoter.UI.Wpf.ViewModel
             }
         }
 
-        public UserService UserService
+        public IUserService UserService
         {
             get
             {
-                return kernel.Get<UserService>();
+                return kernel.Get<IUserService>();
             }
         }
 

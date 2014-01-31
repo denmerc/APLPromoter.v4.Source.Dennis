@@ -16,9 +16,12 @@ namespace APLPromoter.UI.Wpf.Views
             resolver.Register(() => new AnalyticFrame(), typeof(IViewFor<AnalyticViewModel>));
             resolver.Register(() => new PriceRoutineEditView(), typeof(IViewFor<PriceRoutineViewModel>));
 
-            var app = App.Current.Resources["Locator"] as ViewModelLocator; 
+            var app = App.Current.Resources["Locator"] as ViewModelLocator;
+            //Router.Navigate.Execute(new LoginViewModel(this
+            //    , new MainViewModel(this),
+            //    new Promoter.Services.UserService()));
             Router.Navigate.Execute(new LoginViewModel(this
-                , new MainViewModel(this) , 
+                , new MainViewModel(this),
                 app.UserService));
         }
         public IRoutingState Router { get; set; }
