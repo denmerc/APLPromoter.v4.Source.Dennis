@@ -4,6 +4,7 @@ using Promoter.Services;
 using ReactiveUI;
 using System;
 using System.Reactive.Linq;
+using System.Configuration;
 
 namespace APLPromoter.UI.Wpf.ViewModel
 {
@@ -23,13 +24,32 @@ namespace APLPromoter.UI.Wpf.ViewModel
 
             LoginCommand = new ReactiveCommand(canLogin);
 
+
+            //Session<NullT> test = new Session<NullT>
+            //{
+            //    SqlKey = "72B9ED08-5D12-48FD-9CF7-56A3CA30E660"
+
+            //};
+            //LoginCommand  = new APLPromoter.Core.UI.DelegateCommand<Session<NullT>>(OnLogin);
+
+            //Observable.Using(() => new APLPromoter.Client.UserClient(),
+            //    c => c.Initialize(test).);
+            //            //.Subscribe(response => { 
+            //            //    if(response.)
+                        
+            //            //});
+
+
+
+ 
+
             var loggedIn = LoginCommand.RegisterAsync(_ => Observable.Start(() =>
                 {
 
 
                     Session<NullT> init = new Session<NullT>
                     {
-                        SqlKey = "72B9ED08-5D12-48FD-9CF7-56A3CA30E660"
+                        SqlKey = System.Configuration.ConfigurationManager.AppSettings["sharedKey"].ToString()
                                         
                     };
 
@@ -79,6 +99,30 @@ namespace APLPromoter.UI.Wpf.ViewModel
         }
 
 
+
+        //public void OnLogin(Session<NullT> session)
+        //{
+
+        //    Message = string.Empty;
+        //    var initResponse = _proxy.Initialize(session);
+        //    var authenticationResult = false;
+        //    if (initResponse.SessionOk)
+        //    {
+        //        initResponse.UserIdentity = new User.Identity
+        //        {
+        //            Login = LoginName,
+        //            Password = new User.Password { Old = Password }
+        //        };
+        //    }
+
+        //    authenticationResult = _proxy.Authenticate(initResponse).Authenticated;
+
+        //    if (authenticationResult)
+        //        HostScreen.Router.Navigate.Execute(Application);
+        //    else Message = "Login Failed.";
+        //}
+
+
         IUserService _userService;
         public IUserService UserService
         {
@@ -111,23 +155,27 @@ namespace APLPromoter.UI.Wpf.ViewModel
             set { this.RaiseAndSetIfChanged(ref _password, value); }
         }
 
+
         public ReactiveCommand LoginCommand { get; set; }
+        //public APLPromoter.Core.UI.DelegateCommand<Session<NullT>> LoginCommand { get; set; }
+
+
         public IScreen HostScreen { get; private set; }
 
         //string message;
         //public string Message
         //{
-        //    get { return message; }
-        //    set { this.RaiseAndSetIfChanged(ref message, value); }
+        //    get { return message2; }
+        //    set { this.RaiseAndSetIfChanged(ref message2, value); }
         //}
 
         ObservableAsPropertyHelper<string> message;
         public string Message
         {
-            
-            get 
-            { 
-                    return message.Value;
+
+            get
+            {
+                return message.Value;
             }
         }
 

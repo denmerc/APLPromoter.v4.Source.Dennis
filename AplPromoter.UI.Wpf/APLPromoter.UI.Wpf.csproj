@@ -73,6 +73,7 @@
       <HintPath>..\packages\reactiveui-platforms.5.4.0\lib\net45\ReactiveUI.Xaml.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />
     <Reference Include="System.Reactive.Core, Version=2.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -260,6 +261,10 @@
     <ProjectReference Include="..\APLPromoter.Client\APLPromoter.Client.csproj">
       <Project>{b77fe627-bdbc-4848-8c17-3a0e13bc81e6}</Project>
       <Name>APLPromoter.Client</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\APLPromoter.Core\APLPromoter.Core.csproj">
+      <Project>{642154a5-2a2b-4ea3-b7f1-da75fa9b5c32}</Project>
+      <Name>APLPromoter.Core</Name>
     </ProjectReference>
     <ProjectReference Include="..\APLPromoter.Server.Services.Contracts\APLPromoter.Server.Services.Contracts.csproj">
       <Project>{a5940d20-0105-4037-ace5-e941ec9ee5a7}</Project>
