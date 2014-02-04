@@ -3,9 +3,29 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
-    <Grid VerticalAlignment="Center" HorizontalAlignment="Center" Width="250">
+
+    <StackPanel VerticalAlignment="Center">
+        <Grid x:Name="xSplash" Visibility="{Binding SplashVisible, FallbackValue=Visible}" VerticalAlignment="Center" HorizontalAlignment="Center" Width="250" >
+        <Border CornerRadius="6"
+	        BorderBrush="Black"
+	        BorderThickness="1"
+	        Background="White"
+	        Padding="4"
+	        Margin="6">
+            <Border.Effect>
+                <DropShadowEffect Opacity=".5" />
+            </Border.Effect>
+            <StackPanel >
+                    <telerik:RadProgressBar IsIndeterminate="True"></telerik:RadProgressBar>
+                <Label Content="Initializing..." HorizontalContentAlignment="Center"  BorderBrush="White" Background="White" Height="30"  IsEnabled="true" Margin="-4,0,4,0"/>
+                
+            </StackPanel>
+        </Border>
+    </Grid>
+        <Grid x:Name="xLogin" Visibility="{Binding LoginVisible, FallbackValue=Collapsed}" VerticalAlignment="Center" HorizontalAlignment="Center" Width="250">
         <Border CornerRadius="6"
 	        BorderBrush="Black"
 	        BorderThickness="1"
@@ -21,9 +41,11 @@
                 <TextBlock Text="Password:" />
                 <TextBox x:Name="password" />
                 <!--<TextBox x:Name="message" BorderBrush="White" IsReadOnly="True" IsEnabled="False"/>-->
-                <Label x:Name="message" BorderBrush="White" Background="White" Height="30"  IsEnabled="true" Margin="-4,0,4,0"/>
+                <Label x:Name="message" BorderBrush="White" Background="White" Height="30"  IsEnabled="true" Margin="1,0,4,0"/>
                 <Button x:Name="login" Content="Login"/>
             </StackPanel>
         </Border>
     </Grid>
+
+    </StackPanel>
 </UserControl>

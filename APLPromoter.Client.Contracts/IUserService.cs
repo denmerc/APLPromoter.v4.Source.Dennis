@@ -14,6 +14,8 @@ namespace APLPromoter.Client.Contracts
         [OperationContract]
         Session<Client.Entity.NullT> Initialize(Session<Client.Entity.NullT> session);
         [OperationContract]
+        Task<Session<Client.Entity.NullT>> InitializeAsync(Session<Client.Entity.NullT> session);
+        [OperationContract]
         Session<Client.Entity.NullT> Authenticate(Session<Client.Entity.NullT> session);
         [OperationContract]
         Session<Client.Entity.NullT> LoadExplorerPlanning(Session<Client.Entity.NullT> session);

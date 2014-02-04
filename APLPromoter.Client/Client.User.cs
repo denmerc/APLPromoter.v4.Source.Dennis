@@ -16,6 +16,10 @@ namespace APLPromoter.Client
             return Channel.Initialize(session);
         }
 
+        public Task<Session<NullT>> InitializeAsync(Session<Client.Entity.NullT> session)
+        {
+            return Channel.InitializeAsync(session);
+        }
 
         public Session<NullT> Authenticate(Session<NullT> session)
         {

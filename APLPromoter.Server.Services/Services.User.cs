@@ -10,10 +10,10 @@ using System.ServiceModel;
 
 namespace APLPromoter.Server.Services
 {
-    [ServiceBehavior(UseSynchronizationContext = false, 
+    [ServiceBehavior(UseSynchronizationContext = true, 
                     InstanceContextMode = InstanceContextMode.PerCall,
                     ConcurrencyMode = ConcurrencyMode.Single)]
-    //[CallbackBehavior(UseSynchronizationContext = false)]
+    [CallbackBehavior(UseSynchronizationContext = false)]
     public class UserService : IUserService
     {
         private IUserData _userData;

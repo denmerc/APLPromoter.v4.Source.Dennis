@@ -13,11 +13,15 @@ namespace APLPromoter.UI.Wpf.Views
         {
             InitializeComponent();
             
+            
             this.WhenAnyValue(x => x.ViewModel).BindTo(this, x => x.DataContext);
             this.Bind(ViewModel, model => model.Password, x => x.password.Text);
             this.Bind(ViewModel, model => model.LoginName, view => view.userName.Text);
             this.OneWayBind(ViewModel, model => model.Message, x => x.message.Content);
             this.OneWayBind(ViewModel, x => x.LoginCommand, x => x.login.Command);
+            this.Bind(ViewModel, vm => vm.SplashVisible, view => view.xSplash.Visibility);
+            this.Bind(ViewModel, vm => vm.LoginVisible, view => view.xLogin.Visibility);
+
         }
 
         public static readonly DependencyProperty ViewModelProperty =

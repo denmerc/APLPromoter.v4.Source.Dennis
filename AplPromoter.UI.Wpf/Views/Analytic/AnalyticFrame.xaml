@@ -51,19 +51,6 @@
     </UserControl.Resources>
     <Grid>
 
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        <telerik:RadTileView>
 
 
 
@@ -73,7 +60,20 @@
 
 
 
-            <telerik:RadTileViewItem Header="Analytic Detail" x:Name="AnalyticEdit">
+
+
+
+        <telerik:RadTileView MinimizedRowHeight="50" MinimizedColumnWidth="200">
+
+
+
+
+
+
+
+
+
+            <telerik:RadTileViewItem Header="Step 1: Edit/View Analytic" x:Name="AnalyticEdit">
                 <Grid Margin="5">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto" />
@@ -92,7 +92,7 @@
                         Padding="0,0,0,0"
                         Margin="20,0,41,0"
 				       
-				       Text="A" FontSize="72" FontWeight="Bold" />
+				       Text="1" FontSize="72" FontWeight="Bold" />
                     <StackPanel Grid.Column="1" Margin="0 15 0 30">
                         <TextBlock Style="{StaticResource title_style}" Text="{Binding Name}" />
                         <TextBlock Style="{StaticResource textBlock_info}" Text="Analytic Detail" FontSize="24" />
@@ -215,7 +215,7 @@
 
 
 
-            <telerik:RadTileViewItem Header="Add Filters" x:Name="FilterEdit">
+            <telerik:RadTileViewItem Header="Step 2: Add Filters" x:Name="FilterEdit" >
                 <Grid Margin="5">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto" />
@@ -232,9 +232,9 @@
 				       TextAlignment="Center"
                         VerticalAlignment="Top"
                         Padding="0,0,0,0"
-                        Margin="20,0,41,0"
+                        Margin="0,0,41,0"
 				       
-				       Text="F" FontSize="72" FontWeight="Bold" />
+				       Text="2" FontSize="72" FontWeight="Bold" HorizontalAlignment="Right" />
                     <StackPanel Grid.Column="1" Margin="0 15 0 30">
                         <TextBlock Style="{StaticResource title_style}" Text="{Binding Name}" />
                         <TextBlock Style="{StaticResource textBlock_info}" Text="Filter List" FontSize="24" />
@@ -284,7 +284,7 @@
             </telerik:RadTileViewItem>
 
 
-            <telerik:RadTileViewItem Header ="Add Types" x:Name="TypeEdit">
+            <telerik:RadTileViewItem Header ="Step 3 : Add Types" x:Name="TypeEdit">
                 <Grid Margin="5">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto" />
@@ -303,7 +303,7 @@
                         Padding="0,0,0,0"
                         Margin="20,0,41,0"
 				       
-				       Text="T" FontSize="72" FontWeight="Bold" />
+				       Text="3" FontSize="72" FontWeight="Bold" />
                     <StackPanel Grid.Column="1" Margin="0 15 0 30">
                         <TextBlock Style="{StaticResource title_style}" Text="{Binding Name}" />
                         <TextBlock Style="{StaticResource textBlock_info}" Text="Type List" FontSize="24" />
