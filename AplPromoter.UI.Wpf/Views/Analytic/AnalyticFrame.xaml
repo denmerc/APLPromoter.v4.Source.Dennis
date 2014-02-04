@@ -1,7 +1,7 @@
 ﻿<UserControl x:Class="APLPromoter.UI.Wpf.Views.AnalyticFrame"
                 xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
+            xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation" 
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d"
@@ -76,7 +76,7 @@
             <telerik:RadTileViewItem Header="Step 1: Edit/View Analytic" x:Name="AnalyticEdit">
                 <Grid Margin="5">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="20" />
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
@@ -86,13 +86,13 @@
                     </Grid.RowDefinitions>
                     <TextBlock
 				       Height="80"
-                       Width="80"
+                       Width="10"
 				       TextAlignment="Center"
                         VerticalAlignment="Top"
                         Padding="0,0,0,0"
                         Margin="20,0,41,0"
 				       
-				       Text="1" FontSize="72" FontWeight="Bold" />
+				       Text="" FontSize="72" FontWeight="Bold" />
                     <StackPanel Grid.Column="1" Margin="0 15 0 30">
                         <TextBlock Style="{StaticResource title_style}" Text="{Binding Name}" />
                         <TextBlock Style="{StaticResource textBlock_info}" Text="Analytic Detail" FontSize="24" />
@@ -218,7 +218,7 @@
             <telerik:RadTileViewItem Header="Step 2: Add Filters" x:Name="FilterEdit" >
                 <Grid Margin="5">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="20" />
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
@@ -228,13 +228,13 @@
                     </Grid.RowDefinitions>
                     <TextBlock
 				       Height="80"
-                       Width="80"
+                       Width="10"
 				       TextAlignment="Center"
                         VerticalAlignment="Top"
                         Padding="0,0,0,0"
                         Margin="0,0,41,0"
 				       
-				       Text="2" FontSize="72" FontWeight="Bold" HorizontalAlignment="Right" />
+				       Text="" FontSize="72" FontWeight="Bold" HorizontalAlignment="Right" />
                     <StackPanel Grid.Column="1" Margin="0 15 0 30">
                         <TextBlock Style="{StaticResource title_style}" Text="{Binding Name}" />
                         <TextBlock Style="{StaticResource textBlock_info}" Text="Filter List" FontSize="24" />
@@ -259,7 +259,7 @@
                                              MinWidth="500"
 							 MinHeight="386" MaxHeight="500" Width="748"
                              ShowGroupPanel="False"
-							 FrozenColumnCount="{Binding Value, ElementName=RadSlider1, Mode=TwoWay}" HeaderRowStyle="{DynamicResource GridViewHeaderRowStyle1}" HorizontalAlignment="Left">
+							 HeaderRowStyle="{DynamicResource GridViewHeaderRowStyle1}" HorizontalAlignment="Left">
                             <telerik:RadGridView.Columns>
                                 <telerik:GridViewDataColumn UniqueName="Id"
 											Header="ID"
@@ -287,7 +287,7 @@
             <telerik:RadTileViewItem Header ="Step 3 : Add Types" x:Name="TypeEdit">
                 <Grid Margin="5">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="20" />
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
@@ -297,13 +297,13 @@
                     </Grid.RowDefinitions>
                     <TextBlock
 				       Height="80"
-                       Width="80"
+                       Width="10"
 				       TextAlignment="Center"
                         VerticalAlignment="Top"
                         Padding="0,0,0,0"
                         Margin="20,0,41,0"
 				       
-				       Text="3" FontSize="72" FontWeight="Bold" />
+				       Text="" FontSize="72" FontWeight="Bold" />
                     <StackPanel Grid.Column="1" Margin="0 15 0 30">
                         <TextBlock Style="{StaticResource title_style}" Text="{Binding Name}" />
                         <TextBlock Style="{StaticResource textBlock_info}" Text="Type List" FontSize="24" />
@@ -328,7 +328,7 @@
                                              MinWidth="500"
 							 MinHeight="386" MaxHeight="500" Width="748"
                              ShowGroupPanel="False"
-							 FrozenColumnCount="{Binding Value, ElementName=RadSlider1, Mode=TwoWay}" HeaderRowStyle="{DynamicResource GridViewHeaderRowStyle1}" HorizontalAlignment="Left">
+                             HorizontalAlignment="Left">
                             <telerik:RadGridView.Columns>
                                 <telerik:GridViewDataColumn UniqueName="Id"
 											Header="ID"
@@ -365,13 +365,13 @@
                     </Grid.RowDefinitions>
                     <TextBlock
 				       Height="80"
-                       Width="80"
+                       Width="10"
 				       TextAlignment="Center"
                         VerticalAlignment="Top"
                         Padding="0,0,0,0"
                         Margin="20,0,41,0"
 				       
-				       Text="R" FontSize="72" FontWeight="Bold" />
+				       Text="" FontSize="72" FontWeight="Bold" />
                     <StackPanel Grid.Column="1" Margin="0 15 0 30">
                         <TextBlock Style="{StaticResource title_style}" Text="{Binding Name}" />
                         <TextBlock Style="{StaticResource textBlock_info}" Text="Result List" FontSize="24" />
@@ -396,7 +396,7 @@
                                              MinWidth="500"
 							 MinHeight="386" MaxHeight="900" Width="748"
                              ShowGroupPanel="False"
-							 FrozenColumnCount="{Binding Value, ElementName=RadSlider1, Mode=TwoWay}" HeaderRowStyle="{DynamicResource GridViewHeaderRowStyle1}" HorizontalAlignment="Left">
+							  HeaderRowStyle="{DynamicResource GridViewHeaderRowStyle1}" HorizontalAlignment="Left">
                             <telerik:RadGridView.Columns>
                                 <telerik:GridViewDataColumn UniqueName="Id"
 											Header="ID"

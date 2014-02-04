@@ -27,7 +27,7 @@ namespace APLPromoter.UI.Wpf.ViewModel
 
             LoginCommand = new ReactiveCommand(canLogin);
             
-            SplashVisible = Visibility.Visible; //TODO: Add bool to visibility convertor
+            SplashVisible = Visibility.Visible; //TODO: Add bool to visibility converter
             LoginVisible = Visibility.Collapsed;
             //sync
             
