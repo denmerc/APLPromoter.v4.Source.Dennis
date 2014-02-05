@@ -19,8 +19,17 @@
                 <DropShadowEffect Opacity=".5" />
             </Border.Effect>
             <StackPanel >
-                    <telerik:RadProgressBar IsIndeterminate="True"></telerik:RadProgressBar>
-                <Label Content="Initializing..." HorizontalContentAlignment="Center"  BorderBrush="White" Background="White" Height="30"  IsEnabled="true" Margin="-4,0,4,0"/>
+                    <telerik:RadProgressBar x:Name="xProgress" IsIndeterminate="True">
+                        <!--<telerik:RadProgressBar.Foreground>
+                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                <GradientStop Color="#FFFFFBA3" Offset="1"/>
+                                <GradientStop Color="#FFFFFBDA" Offset="0"/>
+                                <GradientStop Color="#FFFFD25A" Offset="0.43"/>
+                                <GradientStop Color="#FFABABAB" Offset="0.42"/>
+                            </LinearGradientBrush>
+                        </telerik:RadProgressBar.Foreground>-->
+                    </telerik:RadProgressBar>
+                <Label x:Name="xInitializationMessage" Content="Initializing..." HorizontalContentAlignment="Center"  BorderBrush="White" Background="White" Height="30"  IsEnabled="true" Margin="-4,0,4,0"/>
                 
             </StackPanel>
         </Border>

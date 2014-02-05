@@ -18,7 +18,11 @@ namespace APLPromoter.UI.Wpf.Views
             this.Bind(ViewModel, model => model.Password, x => x.password.Text);
             this.Bind(ViewModel, model => model.LoginName, view => view.userName.Text);
             this.OneWayBind(ViewModel, model => model.Message, x => x.message.Content);
+            this.OneWayBind(ViewModel, model => model.InitializationMessage, x => x.xInitializationMessage.Content);
             this.OneWayBind(ViewModel, x => x.LoginCommand, x => x.login.Command);
+
+            this.OneWayBind(ViewModel, model => model.IsProgressRunning, x => x.xProgress.IsIndeterminate);
+            //this.OneWayBind(ViewModel, model => model.ProgressBrush, x => x.xProgress.Foreground);
             this.Bind(ViewModel, vm => vm.SplashVisible, view => view.xSplash.Visibility);
             this.Bind(ViewModel, vm => vm.LoginVisible, view => view.xLogin.Visibility);
 

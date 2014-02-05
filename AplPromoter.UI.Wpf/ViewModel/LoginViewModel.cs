@@ -9,6 +9,7 @@ using System.Configuration;
 using System.Threading.Tasks;
 using System.Configuration;
 using System.Windows;
+using System.Windows.Media;
 
 namespace APLPromoter.UI.Wpf.ViewModel
 {
@@ -27,8 +28,12 @@ namespace APLPromoter.UI.Wpf.ViewModel
 
             LoginCommand = new ReactiveCommand(canLogin);
             
+            //Reset to initialize view
             SplashVisible = Visibility.Visible; //TODO: Add bool to visibility converter
+            InitializationMessage = "Initializing...";
             LoginVisible = Visibility.Collapsed;
+            IsProgressRunning = true;
+            
             //sync
             
             //{
@@ -51,10 +56,35 @@ namespace APLPromoter.UI.Wpf.ViewModel
 
             initialized.ContinueWith(t =>
                         {
-                            SplashVisible = Visibility.Collapsed;
-                            LoginVisible = Visibility.Visible;
-                            Session = t.Result;
-                        },_currentScheduler);
+                            try
+                            {
+                               
+                                
+                                Session = t.Result ;
+                                if (Session == null || Session.AppOnline == false) //invalid session prompt to reconnect
+                                {
+                                    InitializationMessage = "Connection failed"; //send failed event message
+                                    IsProgressRunning = false;
+                                    ProgressBrush = Brushes.Red;
+                                }
+                                else 
+                                { 
+                                    //Switch to login
+                                    SplashVisible = Visibility.Collapsed;
+                                    LoginVisible = Visibility.Visible;
+                                }
+
+                            }
+                            catch (Exception ex)
+                            {
+
+                                InitializationMessage = "Connection failed.";
+                                IsProgressRunning = false;
+                                
+                                
+                            }
+                            
+                        }, _currentScheduler);
 
 
 
@@ -82,7 +112,7 @@ namespace APLPromoter.UI.Wpf.ViewModel
                             });
 
             
-                                            //var initialized = await Task.Run(() =>
+                                //var initialized = await Task.Run(() =>
                                 //    {
                                 //        Session<NullT> key = new Session<NullT>()
                                 //        {
@@ -201,7 +231,7 @@ namespace APLPromoter.UI.Wpf.ViewModel
                 };
 
 
-                return authenticated = UserService.Authenticate(Session).Authenticated;
+                return authenticated = UserService.Authenticate(Session).Authenticated; //TODO:Using and Dispose of proxy.
 
 
             });
@@ -340,6 +370,26 @@ namespace APLPromoter.UI.Wpf.ViewModel
             set { this.RaiseAndSetIfChanged(ref _splashVisible, value); }
         }
 
+        bool _isProgessRunning;
+        public bool IsProgressRunning
+        {
+            get
+            { return _isProgessRunning; }
+            set { this.RaiseAndSetIfChanged(ref _isProgessRunning, value); }
+        }
+
+        Brush _progressBrush;
+        public Brush ProgressBrush
+        {
+            get
+            { 
+
+                return IsProgressRunning ? (SolidColorBrush)(new BrushConverter().ConvertFrom("#FFABABAB")) : Brushes.Red; 
+            
+            }
+            set { this.RaiseAndSetIfChanged(ref _progressBrush, value); }
+        }
+
         string _loginName;
         public string LoginName
         {
@@ -367,6 +417,13 @@ namespace APLPromoter.UI.Wpf.ViewModel
         {
             get { return message; }
             set { this.RaiseAndSetIfChanged(ref message, value); }
+        }
+
+        string _initializationMessage;
+        public string InitializationMessage
+        {
+            get { return _initializationMessage; }
+            set { this.RaiseAndSetIfChanged(ref _initializationMessage, value); }
         }
 
         //ObservableAsPropertyHelper<string> message;
