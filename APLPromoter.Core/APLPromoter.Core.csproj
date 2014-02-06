@@ -60,9 +60,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Core.Utils.cs" />
+    <Compile Include="Core.Utilities.cs" />
     <Compile Include="Core.Command.cs" />
-    <Compile Include="Core.Aggregator.cs" />
+    <Compile Include="Core.Events.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
