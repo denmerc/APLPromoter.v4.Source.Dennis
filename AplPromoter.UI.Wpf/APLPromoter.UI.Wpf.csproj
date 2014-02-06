@@ -150,38 +150,38 @@
     <Compile Include="Domain\PriceRoutine.cs" />
     <Compile Include="Domain\Type.cs" />
     <Compile Include="Services\UserService.cs" />
-    <Compile Include="ViewModel\Analytic\AnalyticViewModel.cs" />
-    <Compile Include="ViewModel\ExplorerViewModel.cs" />
-    <Compile Include="ViewModel\HomeViewModel.cs" />
-    <Compile Include="ViewModel\LoginViewModel.cs">
+    <Compile Include="WPF.Analytic.Main.ViewModel.cs" />
+    <Compile Include="ViewModel\WPF.Explorer.ViewModel.cs" />
+    <Compile Include="ViewModel\WPF.Home.ViewModel.cs" />
+    <Compile Include="ViewModel\WPF.Login.ViewModel.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="ViewModel\MainViewModel.cs" />
-    <Compile Include="ViewModel\PriceRoutine\PriceRoutineViewModel.cs" />
-    <Compile Include="ViewModel\ViewModelLocator.cs" />
-    <Compile Include="Views\Analytic\AnalyticFrame.xaml.cs">
-      <DependentUpon>AnalyticFrame.xaml</DependentUpon>
+    <Compile Include="ViewModel\WPF.Main.ViewModel.cs" />
+    <Compile Include="WPF.PriceRoutine.Main.ViewModel.cs" />
+    <Compile Include="ViewModel\WPF.ViewModelLocator.cs" />
+    <Compile Include="Views\WPF.Analytic.Frame.xaml.cs">
+      <DependentUpon>WPF.Analytic.Frame.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Analytic\AnalyticEditView.xaml.cs">
-      <DependentUpon>AnalyticEditView.xaml</DependentUpon>
+    <Compile Include="Views\WPF.Analytic.Edit.View.xaml.cs">
+      <DependentUpon>WPF.Analytic.Edit.View.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Analytic\AnalyticListView.xaml.cs">
-      <DependentUpon>AnalyticListView.xaml</DependentUpon>
+    <Compile Include="Views\WPF.Analytic.List.View.xaml.cs">
+      <DependentUpon>WPF.Analytic.List.View.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\HomeView.xaml.cs">
-      <DependentUpon>HomeView.xaml</DependentUpon>
+    <Compile Include="Views\WPF.Home.View.xaml.cs">
+      <DependentUpon>WPF.Home.View.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\LoginView.xaml.cs">
-      <DependentUpon>LoginView.xaml</DependentUpon>
+    <Compile Include="Views\WPF.Login.View.xaml.cs">
+      <DependentUpon>WPF.Login.View.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\MainView.xaml.cs">
-      <DependentUpon>MainView.xaml</DependentUpon>
+    <Compile Include="Views\WPF.Main.View.xaml.cs">
+      <DependentUpon>WPF.Main.View.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\PriceRoutine\PriceRoutineEditView.xaml.cs">
-      <DependentUpon>PriceRoutineEditView.xaml</DependentUpon>
+    <Compile Include="Views\WPF.PriceRoutine.Edit.View.xaml.cs">
+      <DependentUpon>WPF.PriceRoutine.Edit.View.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Templates.cs" />
-    <Compile Include="Views\ViewRouter.cs" />
+    <Compile Include="Views\WPF.Templates.cs" />
+    <Compile Include="Views\WPF.ViewRouter.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -193,39 +193,39 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Views\Analytic\AnalyticFrame.xaml">
+    <Page Include="Views\WPF.Analytic.Frame.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Analytic\AnalyticEditView.xaml">
+    <Page Include="Views\WPF.Analytic.Edit.View.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Analytic\AnalyticListView.xaml">
+    <Page Include="Views\WPF.Analytic.List.View.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\HomeView.xaml">
+    <Page Include="Views\WPF.Home.View.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\LoginView.xaml">
+    <Page Include="Views\WPF.Login.View.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\MainView.xaml">
+    <Page Include="Views\WPF.Main.View.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\PriceRoutine\PriceRoutineEditView.xaml">
+    <Page Include="Views\WPF.PriceRoutine.Edit.View.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Resources.xaml">
+    <Page Include="Views\WPF.Resources.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Styles.xaml">
+    <Page Include="Views\WPF.Styles.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -297,6 +297,7 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
