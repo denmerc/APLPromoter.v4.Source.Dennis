@@ -34,21 +34,6 @@ namespace APLPromoter.UI.Wpf.ViewModel
             LoginVisible = Visibility.Collapsed;
             IsProgressRunning = true;
             
-            //sync
-            
-            //{
-            //    SqlKey = "72B9ED08-5D12-48FD-9CF7-56A3CA30E660"
-
-            //};
-            //LoginCommand  = new APLPromoter.Core.UI.DelegateCommand<Session<NullT>>(OnLogin);
-
-            //Observable.Using(() => new APLPromoter.Client.UserClient(),
-            //    c => c.Initialize(test).);
-            //            //.Subscribe(response => { 
-            //            //    if(response.)
-                        
-            //            //});
-
 
             TaskScheduler _currentScheduler = TaskScheduler.FromCurrentSynchronizationContext();
 
@@ -111,97 +96,8 @@ namespace APLPromoter.UI.Wpf.ViewModel
 
                             });
 
-            
-                                //var initialized = await Task.Run(() =>
-                                //    {
-                                //        Session<NullT> key = new Session<NullT>()
-                                //        {
-                                //            SqlKey = System.Configuration.ConfigurationManager.AppSettings["sharedkey"].ToString()
-                                //        };
-                                //        return _proxy.InitializeAsync(key);
-
-                                //    }).ConfigureAwait(false);
-
-
-                                //var authenticated = false;
-                                //if (initialized.SessionOk) 
-                                //{
-                                //    initialized.UserIdentity = new User.Identity
-                                //    {
-                                //        Login = LoginName,
-                                //        Password = new User.Password { Old = Password}
-                                //    };
-                            
-                                
-                                //authenticated = await Task.Run(() =>
-                                //    {
-                                //        return _proxy.Authenticate(initialized).Authenticated;
-                                //    }).ConfigureAwait(false);
-                                    
-                                //        //.ContinueWith<string>( () => 
-                                //        //{
-                                //        //    return _proxy.Authenticate().Authenticated ? "Login Succeeded...Continuing to Analytics" : "Login Failed...Please try again.";
-                                //        //};
-                                
-                                
-                                //}
-
-                                //return authenticated ? "Login Succeeded" : "LoginCommand Failed";
 
             
-            //var loggedIn = LoginCommand.RegisterAsync(_ => Observable.Start(() =>
-            //    {
-
-
-            //        Session<NullT> init = new Session<NullT>
-            //        {
-            //            SqlKey = System.Configuration.ConfigurationManager.AppSettings["sharedKey"].ToString()
-                                        
-            //        };
-
-            //        var initResponse = _proxy.Initialize(init);
-            //        var authenticationResult = false;
-            //        if (initResponse.SessionOk)
-            //        {
-            //            initResponse.UserIdentity = new User.Identity
-            //            {
-            //                Login = LoginName,
-            //                Password = new User.Password { Old = Password }
-            //            };
-
-                        
-            //            authenticationResult = _proxy.Authenticate(initResponse).Authenticated;
-            //            return authenticationResult ? "Login Succeeded...Continuing to Analytics"
-            //                : "Login Failed...Please try again";
-            //        }
-            //        else return "Failed to Initialize.";
-
-                    
-            //        //var AuthenticationResult = UserService.Authenticate(LoginName, Password);
-            //        //return AuthenticationResult == AuthenticationResult.Authenticated
-            //        //    ? "Login Succeeded...Continuing to Analytics"
-            //        //    : "Login Failed...Please try again.";
-            //    }));
-
-
-                        //loggedIn.Subscribe(s =>
-            //{
-            //    if (s == "Login Succeeded")
-            //    {
-            //        HostScreen.Router.Navigate.Execute(Application);
-            //    }
-
-            //});
-
-            //message = loggedIn.ToProperty(this, x => x.Message, string.Empty);
-
-            //message = new ObservableAsPropertyHelper<string>(loggedIn,
-            //    s =>
-            //    {
-
-            //        raisePropertyChanged("Message");
-
-            //    });//subscribe
         }
 
 
@@ -306,28 +202,6 @@ namespace APLPromoter.UI.Wpf.ViewModel
 
         } 
 
-        //public void OnLogin(Session<NullT> session)
-        //{
-
-        //    Message = string.Empty;
-        //    var initResponse = _proxy.Initialize(session);
-        //    var authenticationResult = false;
-        //    if (initResponse.SessionOk)
-        //    {
-        //        initResponse.UserIdentity = new User.Identity
-        //        {
-        //            Login = LoginName,
-        //            Password = new User.Password { Old = Password }
-        //        };
-        //    }
-
-        //    authenticationResult = _proxy.Authenticate(initResponse).Authenticated;
-
-        //    if (authenticationResult)
-        //        HostScreen.Router.Navigate.Execute(Application);
-        //    else Message = "Login Failed.";
-        //}
-
         Session<NullT> _session;
         public Session<NullT> Session
         {
@@ -407,8 +281,6 @@ namespace APLPromoter.UI.Wpf.ViewModel
 
 
         public ReactiveCommand LoginCommand { get; set; }
-        //public APLPromoter.Core.UI.DelegateCommand<Session<NullT>> LoginCommand { get; set; }
-
 
         public IScreen HostScreen { get; private set; }
 
@@ -425,16 +297,6 @@ namespace APLPromoter.UI.Wpf.ViewModel
             get { return _initializationMessage; }
             set { this.RaiseAndSetIfChanged(ref _initializationMessage, value); }
         }
-
-        //ObservableAsPropertyHelper<string> message;
-        //public string Message
-        //{
-
-        //    get
-        //    {
-        //        return message.Value;
-        //    }
-        //}
 
         public string UrlPathSegment
         {
