@@ -5,7 +5,6 @@ using APLPromoter.UI.Wpf.ViewModel;
 using APLPromoter.UI.Wpf.Views;
 using Ninject;
 using Ninject.Modules;
-using Promoter.Services;
 
 namespace APLPromoter.UI.Wpf.ViewModel
 {
@@ -89,8 +88,7 @@ namespace APLPromoter.UI.Wpf.Modules
             Bind<ViewModelLocator>().ToSelf().InSingletonScope();
             Bind<APLPromoter.Client.Contracts.IAnalyticService>().To<AnalyticClient>()
                 .InSingletonScope();
-            Bind<IAuthentication>().To<UserService>().InSingletonScope();
-
+            
             Bind<IUserService>().To<UserClient>().InSingletonScope();
 
             Bind<ViewRouter>().ToSelf().InSingletonScope();

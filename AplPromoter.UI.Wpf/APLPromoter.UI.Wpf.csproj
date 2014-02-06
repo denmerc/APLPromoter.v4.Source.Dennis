@@ -149,7 +149,6 @@
     <Compile Include="Domain\Filter.cs" />
     <Compile Include="Domain\PriceRoutine.cs" />
     <Compile Include="Domain\Type.cs" />
-    <Compile Include="Services\UserService.cs" />
     <Compile Include="WPF.Analytic.Main.ViewModel.cs" />
     <Compile Include="ViewModel\WPF.Explorer.ViewModel.cs" />
     <Compile Include="ViewModel\WPF.Home.ViewModel.cs" />
@@ -297,7 +296,9 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Services\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

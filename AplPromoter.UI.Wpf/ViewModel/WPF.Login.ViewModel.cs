@@ -1,7 +1,6 @@
 ﻿using APLPromoter.Client.Contracts;
 using APLPromoter.Client.Entity;
 using APLPromoter.Core.UI;
-using Promoter.Services;
 using ReactiveUI;
 using System;
 using System.Reactive.Linq;
