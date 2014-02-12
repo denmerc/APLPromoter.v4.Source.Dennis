@@ -44,7 +44,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Client.Analytic.cs" />
+    <Compile Include="Client.Analytics.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Client.User.cs" />
   </ItemGroup>

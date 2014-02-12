@@ -1,5 +1,4 @@
 ﻿
-using Promoter.Domain;
 using ReactiveUI;
 using System.Collections.ObjectModel;
 
@@ -11,7 +10,7 @@ namespace APLPromoter.UI.Wpf.ViewModel
         {
 
         }
-        public ExplorerViewModel(ObservableCollection<Promoter.Domain.Analytic> analytics, 
+        public ExplorerViewModel(ObservableCollection<Analytic> analytics, 
                                                 ObservableCollection<PriceRoutine> priceRoutines)
         {
             Analytics = analytics;
@@ -42,7 +41,7 @@ namespace APLPromoter.UI.Wpf.ViewModel
             }
         }
         public ObservableCollection<INode> RootNodes { get; set; }
-        public ObservableCollection<Promoter.Domain.Analytic> Analytics { get; set; }
+        public ObservableCollection<Analytic> Analytics { get; set; }
         public ObservableCollection<PriceRoutine> PriceRoutines { get; set; }
 
         

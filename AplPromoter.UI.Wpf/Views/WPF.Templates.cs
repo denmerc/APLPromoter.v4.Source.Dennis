@@ -1,5 +1,4 @@
 ﻿using APLPromoter.UI.Wpf.ViewModel;
-using Promoter.Domain;
 using System;
 using System.Collections.Generic;
 using System.Linq;

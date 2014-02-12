@@ -133,18 +133,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Domain\Analytic.cs" />
-    <Compile Include="Domain\Filter.cs" />
-    <Compile Include="Domain\PriceRoutine.cs" />
-    <Compile Include="Domain\Type.cs" />
-    <Compile Include="WPF.Analytic.Main.ViewModel.cs" />
+    <Compile Include="ViewModel\WPF.Analytic.Main.ViewModel.cs" />
     <Compile Include="ViewModel\WPF.Explorer.ViewModel.cs" />
     <Compile Include="ViewModel\WPF.Home.ViewModel.cs" />
     <Compile Include="ViewModel\WPF.Login.ViewModel.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="ViewModel\WPF.Main.ViewModel.cs" />
-    <Compile Include="WPF.PriceRoutine.Main.ViewModel.cs" />
+    <Compile Include="ViewModel\WPF.PriceRoutine.Main.ViewModel.cs" />
     <Compile Include="ViewModel\WPF.ViewModelLocator.cs" />
     <Compile Include="Views\WPF.Analytic.Frame.xaml.cs">
       <DependentUpon>WPF.Analytic.Frame.xaml</DependentUpon>

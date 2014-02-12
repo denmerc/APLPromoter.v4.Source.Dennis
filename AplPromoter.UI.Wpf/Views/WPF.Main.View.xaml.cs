@@ -1,5 +1,4 @@
 ﻿using APLPromoter.UI.Wpf.ViewModel;
-using Promoter.Domain;
 using ReactiveUI;
 using System;
 using System.Windows;
