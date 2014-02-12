@@ -1,5 +1,4 @@
-﻿using Promoter.Domain;
-using ReactiveUI;
+﻿using ReactiveUI;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,8 +14,8 @@ namespace APLPromoter.UI.Wpf.ViewModel
             Model = p;
             Name = Model.Name;
         }
-        private Promoter.Domain.PriceRoutine _Model;
-        public Promoter.Domain.PriceRoutine Model
+        private PriceRoutine _Model;
+        public PriceRoutine Model
         {
             get
             {

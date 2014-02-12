@@ -1,5 +1,4 @@
 ﻿using APLPromoter.Client.Contracts;
-using APLPromoter.UI.Wpf.Domain;
 //using APLPromoter.UI.Wpf.Services;
 using ReactiveUI;
 using System;
@@ -10,7 +9,7 @@ namespace APLPromoter.UI.Wpf.ViewModel
 {
     public class AnalyticViewModel : ReactiveObject, IRoutableViewModel
     {
-        public AnalyticViewModel(Promoter.Domain.Analytic analytic)
+        public AnalyticViewModel(Analytic analytic)
         {
             Model = analytic;
             if (Model != null)
@@ -51,8 +50,8 @@ namespace APLPromoter.UI.Wpf.ViewModel
         public IAnalyticService AnalyticService { get; set; }
         public ReactiveCommand FiltersCommand { get; set; }
         public ReactiveCommand TypesCommand { get; set; }
-        private ReactiveList<APLPromoter.UI.Wpf.Domain.Type> _Types = new ReactiveList<Domain.Type>();
-        public ReactiveList<APLPromoter.UI.Wpf.Domain.Type> Types
+        private ReactiveList<Type> _Types = new ReactiveList<Type>();
+        public ReactiveList<Type> Types
         {
             get
             {
@@ -101,8 +100,8 @@ namespace APLPromoter.UI.Wpf.ViewModel
                 }
             }
         }
-        private Promoter.Domain.Analytic _Model;
-        public Promoter.Domain.Analytic Model 
+        private Analytic _Model;
+        public Analytic Model 
         {
             get
             {
@@ -195,12 +194,12 @@ namespace APLPromoter.UI.Wpf.ViewModel
             };
         }
 
-        public ObservableCollection<APLPromoter.UI.Wpf.Domain.Type> LoadTypes()
+        public ObservableCollection<Type> LoadTypes()
         {
-            return new ObservableCollection<APLPromoter.UI.Wpf.Domain.Type>() {
-                new APLPromoter.UI.Wpf.Domain.Type { Id = 1, Name = "Types1", Description = "Types Description 1"},
-                new APLPromoter.UI.Wpf.Domain.Type { Id = 2, Name = "Types2", Description = "Types Description 2"},
-                new APLPromoter.UI.Wpf.Domain.Type { Id = 3, Name = "Types3", Description = "Types Description 3"}
+            return new ObservableCollection<Type>() {
+                new Type { Id = 1, Name = "Types1", Description = "Types Description 1"},
+                new Type { Id = 2, Name = "Types2", Description = "Types Description 2"},
+                new Type { Id = 3, Name = "Types3", Description = "Types Description 3"}
             };
         }
 

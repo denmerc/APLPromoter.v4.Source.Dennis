@@ -38,7 +38,7 @@
   <ItemGroup>
     <Reference Include="FluentValidation, Version=5.0.0.1, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\FluentValidation.5.0.0.1\lib\Net40\FluentValidation.dll</HintPath>
+      <HintPath>..\..\..\_tfs\APLPromoter.v4.Source.Test\lib\FluentValidation.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -57,7 +57,6 @@
     <Compile Include="Entity.Client.Session.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Client.Entity.cd" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
