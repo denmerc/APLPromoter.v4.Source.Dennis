@@ -215,7 +215,7 @@ namespace APLPromoter.Tests.Server.Data {
         [TestMethod, TestCategory("Analytics select")]
         public void TEST18_GivenUserRequestsAnalyticTypeList_WhenSessionValid_ThenSuccessStatusRecdAndAnalyticsTypesListRecd() {
             var newIdentity = new Analytic.Identity { Id = 1, Name = "New Analytic Routine (1)", Description = "New Analytic Routine (1) description" };
-            Session<List<APLPromoter.Server.Entity.Analytic.Type>> response = _AnalyticData.LoadTypes(new Session<APLPromoter.Server.Entity.Analytic.Identity> { SqlKey = SQLKEYAPLADMIN, Data = newIdentity });
+            Session<List<APLPromoter.Server.Entity.Analytic.Driver>> response = _AnalyticData.LoadDrivers(new Session<APLPromoter.Server.Entity.Analytic.Identity> { SqlKey = SQLKEYAPLADMIN, Data = newIdentity });
 
             this.listener.WriteLine("Begin - " + System.Reflection.MethodInfo.GetCurrentMethod().Name); this.listener.WriteLine(lineBreak);
             try {
@@ -288,7 +288,7 @@ namespace APLPromoter.Tests.Server.Data {
         public void TEST20_GivenUserInputsAnalyticTypes_WhenAnalyticTypesSessionValid_ThenSuccessStatusRecdAndValidTypesSaved() {
             Boolean sessionLoaded = false;
             var newIdentity = new Analytic.Identity { Id = 1, Name = "New Analytic Routine (1)", Description = "New Analytic Routine (1) description" };
-            Session<List<APLPromoter.Server.Entity.Analytic.Type>> responseLoad = _AnalyticData.LoadTypes(new Session<APLPromoter.Server.Entity.Analytic.Identity> { SqlKey = SQLKEYAPLADMIN, Data = newIdentity });
+            Session<List<APLPromoter.Server.Entity.Analytic.Driver>> responseLoad = _AnalyticData.LoadDrivers(new Session<APLPromoter.Server.Entity.Analytic.Identity> { SqlKey = SQLKEYAPLADMIN, Data = newIdentity });
 
             this.listener.WriteLine("Begin type load - " + System.Reflection.MethodInfo.GetCurrentMethod().Name); this.listener.WriteLine(lineBreak);
             try {
@@ -303,8 +303,8 @@ namespace APLPromoter.Tests.Server.Data {
             }
 
             if (sessionLoaded) {
-                var newAnalytic = new APLPromoter.Server.Entity.Analytic { Self = newIdentity, Types = responseLoad.Data };
-                Session<List<APLPromoter.Server.Entity.Analytic.Type>> responseSave = _AnalyticData.SaveTypes(new Session<Analytic> { SqlKey = SQLKEYAPLADMIN, Data = newAnalytic });
+                var newAnalytic = new APLPromoter.Server.Entity.Analytic { Self = newIdentity, Drivers = responseLoad.Data };
+                Session<List<APLPromoter.Server.Entity.Analytic.Driver>> responseSave = _AnalyticData.SaveDrivers(new Session<Analytic> { SqlKey = SQLKEYAPLADMIN, Data = newAnalytic });
 
                 this.listener.WriteLine("Begin type save - " + System.Reflection.MethodInfo.GetCurrentMethod().Name); this.listener.WriteLine(lineBreak);
                 try {

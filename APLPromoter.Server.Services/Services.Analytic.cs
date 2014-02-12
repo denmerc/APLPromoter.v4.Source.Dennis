@@ -46,14 +46,14 @@ namespace APLPromoter.Server.Services
             return _analyticRepo.SaveFilters(session);
         }
 
-        public Session<List<Server.Entity.Analytic.Type>> LoadTypes(Session<Server.Entity.Analytic.Identity> session)
+        public Session<List<Server.Entity.Analytic.Driver>> LoadTypes(Session<Server.Entity.Analytic.Identity> session)
         {
-            return _analyticRepo.LoadTypes(session);
+            return _analyticRepo.LoadDrivers(session);
         }
 
-        public Session<List<Server.Entity.Analytic.Type>> SaveTypes(Session<Server.Entity.Analytic> session)
+        public Session<List<Server.Entity.Analytic.Driver>> SaveTypes(Session<Server.Entity.Analytic> session)
         {
-            return _analyticRepo.SaveTypes(session);
+            return _analyticRepo.SaveDrivers(session);
         }
     }
 }

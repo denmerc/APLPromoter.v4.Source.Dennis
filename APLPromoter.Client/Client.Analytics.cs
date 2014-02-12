@@ -30,14 +30,14 @@ namespace APLPromoter.Client
             return Channel.SaveFilters(session);
         }
 
-        public Session<List<Client.Entity.Analytic.Type>> LoadTypes(Session<Client.Entity.NullT> session)
+        public Session<List<Client.Entity.Analytic.Driver>> LoadDrivers(Session<Client.Entity.NullT> session)
         {
-            return Channel.LoadTypes(session);
+            return Channel.LoadDrivers(session);
         }
 
-        public Session<List<Client.Entity.Analytic.Type>> SaveTypes(Session<Client.Entity.Analytic> session)
+        public Session<List<Client.Entity.Analytic.Driver>> SaveDrivers(Session<Client.Entity.Analytic> session)
         {
-            return Channel.SaveTypes(session);
+            return Channel.SaveDrivers(session);
         }
     }
 }

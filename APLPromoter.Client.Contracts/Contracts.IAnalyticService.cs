@@ -20,8 +20,8 @@ namespace APLPromoter.Client.Contracts
         [OperationContract]
         Session<List<Client.Entity.Filter>> SaveFilters(Session<Client.Entity.Analytic> session);
         [OperationContract]
-        Session<List<Client.Entity.Analytic.Type>> LoadTypes(Session<Client.Entity.NullT> session);
+        Session<List<Client.Entity.Analytic.Driver>> LoadDrivers(Session<Client.Entity.NullT> session);
         [OperationContract]
-        Session<List<Client.Entity.Analytic.Type>> SaveTypes(Session<Client.Entity.Analytic> session);
+        Session<List<Client.Entity.Analytic.Driver>> SaveDrivers(Session<Client.Entity.Analytic> session);
     }
 }

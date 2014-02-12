@@ -261,10 +261,10 @@ namespace APLPromoter.Tests.Server.Services
             response.ClientMessage.Should().BeEmpty();
 
             //LoadTypes
-            Session<List<Analytic.Type>>  responseLoadTypes = 
+            Session<List<Analytic.Driver>> responseLoadTypes = 
                 _AnalyticService.LoadTypes(new Session<Analytic.Identity>{SqlKey = SQLKEY_ADMIN, Data = validAnalytic});
             var selectedType = responseLoadTypes.Data.FirstOrDefault();
-            var list = new List<Analytic.Type>();
+            var list = new List<Analytic.Driver>();
             //Modify
             selectedType.Selected = true;
             selectedType.Modes[0].Selected = true;
@@ -273,7 +273,7 @@ namespace APLPromoter.Tests.Server.Services
             selectedType.Modes[0].Groups[0].MaxOutlier = 40;
 
             list.Add(selectedType);
-            var analytic = new Analytic { Self = validAnalytic, Types = list };                       
+            var analytic = new Analytic { Self = validAnalytic, Drivers = list };                       
                                     
 
 
@@ -359,13 +359,13 @@ namespace APLPromoter.Tests.Server.Services
                                     new Filter{},
                                     new Filter{}
                 },
-                Types = new List<Analytic.Type>{
-                    new Analytic.Type {
-                        Modes = new List<Analytic.Type.Mode>{
-                            new Analytic.Type.Mode{
+                Drivers = new List<Analytic.Driver>{
+                    new Analytic.Driver {
+                        Modes = new List<Analytic.Driver.Mode>{
+                            new Analytic.Driver.Mode{
                                 Key = (int) ModeType.Manual,
-                                Groups = new List<Analytic.Type.Mode.Group>{
-                                    new Analytic.Type.Mode.Group{
+                                Groups = new List<Analytic.Driver.Mode.Group>{
+                                    new Analytic.Driver.Mode.Group{
                                         Id = 1,
                                         MinOutlier = 8,
                                         MaxOutlier = 6,
@@ -403,13 +403,13 @@ namespace APLPromoter.Tests.Server.Services
                                     new Filter{},
                                     new Filter{}
                 },
-                Types = new List<Analytic.Type>{
-                    new Analytic.Type {
-                        Modes= new List<Analytic.Type.Mode>{
-                            new Analytic.Type.Mode{
+                Drivers = new List<Analytic.Driver>{
+                    new Analytic.Driver {
+                        Modes= new List<Analytic.Driver.Mode>{
+                            new Analytic.Driver.Mode{
                                 Key = (int) ModeType.Manual,
-                                Groups = new List<Analytic.Type.Mode.Group>{
-                                    new Analytic.Type.Mode.Group{
+                                Groups = new List<Analytic.Driver.Mode.Group>{
+                                    new Analytic.Driver.Mode.Group{
                                         Id = 1,
                                         MinOutlier = 8,
                                         MaxOutlier = 6,
@@ -446,13 +446,13 @@ namespace APLPromoter.Tests.Server.Services
                                     new Filter{},
                                     new Filter{}
                 },
-                Types = new List<Analytic.Type>{
-                    new Analytic.Type {
-                        Modes= new List<Analytic.Type.Mode>{
-                            new Analytic.Type.Mode{
+                Drivers = new List<Analytic.Driver>{
+                    new Analytic.Driver {
+                        Modes= new List<Analytic.Driver.Mode>{
+                            new Analytic.Driver.Mode{
                                 Key = (int) ModeType.Manual,
-                                Groups = new List<Analytic.Type.Mode.Group>{
-                                    new Analytic.Type.Mode.Group{
+                                Groups = new List<Analytic.Driver.Mode.Group>{
+                                    new Analytic.Driver.Mode.Group{
                                         Id = 1,
                                         MinOutlier = 8,
                                         MaxOutlier = 6,
@@ -489,13 +489,13 @@ namespace APLPromoter.Tests.Server.Services
                                     new Filter{},
                                     new Filter{}
                 },
-                Types = new List<Analytic.Type>{
-                    new Analytic.Type {
-                        Modes= new List<Analytic.Type.Mode>{
-                            new Analytic.Type.Mode{
+                Drivers = new List<Analytic.Driver>{
+                    new Analytic.Driver {
+                        Modes= new List<Analytic.Driver.Mode>{
+                            new Analytic.Driver.Mode{
                                 Key = (int) ModeType.Manual,
-                                Groups = new List<Analytic.Type.Mode.Group>{
-                                    new Analytic.Type.Mode.Group{
+                                Groups = new List<Analytic.Driver.Mode.Group>{
+                                    new Analytic.Driver.Mode.Group{
                                         Id = 1,
                                         MinOutlier = 8,
                                         MaxOutlier = 6,
@@ -506,12 +506,12 @@ namespace APLPromoter.Tests.Server.Services
 
                         }
                     },
-                     new Analytic.Type {
-                        Modes = new List<Analytic.Type.Mode>{
-                            new Analytic.Type.Mode{
+                     new Analytic.Driver {
+                        Modes = new List<Analytic.Driver.Mode>{
+                            new Analytic.Driver.Mode{
                                 Key = (int) ModeType.Manual,
-                                Groups = new List<Analytic.Type.Mode.Group>{
-                                    new Analytic.Type.Mode.Group{
+                                Groups = new List<Analytic.Driver.Mode.Group>{
+                                    new Analytic.Driver.Mode.Group{
                                         Id = 2,
                                         MinOutlier = 3,
                                         MaxOutlier = 4,

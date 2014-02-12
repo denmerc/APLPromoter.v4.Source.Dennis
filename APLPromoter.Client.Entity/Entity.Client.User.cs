@@ -14,7 +14,7 @@ namespace APLPromoter.Client.Entity
         {
 
             #region Initialize...
-            public Identity() { }
+            public Identity() { }               
             public Identity(
                 Int32 Id,
                 String sqlKey,

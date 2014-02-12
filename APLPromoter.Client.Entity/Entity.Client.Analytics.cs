@@ -86,7 +86,7 @@ namespace APLPromoter.Client.Entity
         }
 
         [DataContract]
-        public class Type
+        public class Driver
         {
             [DataMember]
             public Int32 Id { get; set; }
@@ -121,29 +121,29 @@ namespace APLPromoter.Client.Entity
 
 }
 
-namespace APLPromoter.Client.Entity
-{
-    [DataContract]
-    public class Filter : ObjectBase
-    {
-        //[DataMember]
-        //public Int32 Id { get; set; }
-        [DataContract]
-        public class Value
-        {
-            [DataMember]
-            public Int32 Id { get; set; }
-            [DataMember]
-            public string Code { get; set; }
-            [DataMember]
-            public string Name { get; set; }
-            [DataMember]
-            public Boolean Included { get; set; }
-            [DataMember]
-            public Boolean Dirty { get; set; }
-        }
-    }
-}
+//namespace APLPromoter.Client.Entity
+//{
+//    [DataContract]
+//    public class Filter : ObjectBase
+//    {
+//        //[DataMember]
+//        //public Int32 Id { get; set; }
+//        [DataContract]
+//        public class Value
+//        {
+//            [DataMember]
+//            public Int32 Id { get; set; }
+//            [DataMember]
+//            public string Code { get; set; }
+//            [DataMember]
+//            public string Name { get; set; }
+//            [DataMember]
+//            public Boolean Included { get; set; }
+//            [DataMember]
+//            public Boolean Dirty { get; set; }
+//        }
+//    }
+//}
 
 
 

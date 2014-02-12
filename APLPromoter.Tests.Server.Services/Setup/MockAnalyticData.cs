@@ -13,7 +13,7 @@ namespace APLPromoter.Tests.Server.Services
     {
         private readonly List<Analytic.Identity> _SavedAnalytics = new List<Analytic.Identity>();
         private readonly List<Filter> _SavedFilters = new List<Filter>();
-        private readonly List<Analytic.Type> _SavedTypes = new List<Analytic.Type>();
+        private readonly List<Analytic.Driver> _SavedTypes = new List<Analytic.Driver>();
 
         private SqlService _SqlService;
         
@@ -62,32 +62,53 @@ namespace APLPromoter.Tests.Server.Services
             return new Session<List<Filter>> { ServerMessage = "SavedFilters" };
         }
 
-        public Session<List<Analytic.Type>> LoadTypes(Session<Analytic.Identity> session)
+        public Session<List<Analytic.Driver>> LoadTypes(Session<Analytic.Identity> session)
         {
-            return new Session<List<Analytic.Type>> { Data = _SavedTypes };
+            return new Session<List<Analytic.Driver>> { Data = _SavedTypes };
         }
 
-        public Session<List<Analytic.Type>> SaveTypes(Session<Analytic> session)
+        public Session<List<Analytic.Driver>> SaveTypes(Session<Analytic> session)
         {
             var typesWithInvalidNumGroups = (
-                from type in session.Data.Types
+                from type in session.Data.Drivers
                 from mode in type.Modes
              where mode.Groups.Count <= 0 || mode.Groups.Count > 15
                          select mode.Groups).ToList();
-            
-            var groupsWithInvalidOutliers = (from t in session.Data.Types
+
+            var groupsWithInvalidOutliers = (from t in session.Data.Drivers
                                              from m in t.Modes
                                              from g in m.Groups
                                              where g.MaxOutlier < g.MinOutlier
-                                             select g).ToList(); 
+                                             select g).ToList();
 
 
-            if (session.Data.Types == null || typesWithInvalidNumGroups.Count >= 1 || groupsWithInvalidOutliers.Count >= 1)
+            if (session.Data.Drivers == null || typesWithInvalidNumGroups.Count >= 1 || groupsWithInvalidOutliers.Count >= 1)
             {
-                return new Session<List<Analytic.Type>> {ServerMessage = "Analytic.Types.Save - Invalid Groups"};
+                return new Session<List<Analytic.Driver>> { ServerMessage = "Analytic.Types.Save - Invalid Groups" };
             };
-            _SavedTypes.AddRange(session.Data.Types);
-            return new Session<List<Analytic.Type>> { ServerMessage = "Analytic.Types.Save - Success" };
+            _SavedTypes.AddRange(session.Data.Drivers);
+            return new Session<List<Analytic.Driver>> { ServerMessage = "Analytic.Types.Save - Success" };
+        }
+
+
+        public Session<List<Analytic.Driver>> LoadDrivers(Session<Analytic.Identity> session)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Session<List<Analytic.Driver>> SaveDrivers(Session<Analytic> session)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Session<List<PriceList>> LoadPriceLists(Session<Analytic.Identity> session)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Session<List<PriceList>> SavePriceLists(Session<Analytic> session)
+        {
+            throw new NotImplementedException();
         }
     }
 

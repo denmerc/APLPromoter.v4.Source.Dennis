@@ -29,9 +29,9 @@ namespace APLPromoter.Server.Data {
             //Record set...
             while (reader.Read()) {
                 list.Add(new Analytic.Identity (
-                    Int32.Parse(reader[AnalyticMap.Names.id].ToString()),
-                    reader[AnalyticMap.Names.name].ToString(),
-                    reader[AnalyticMap.Names.description].ToString(),
+                    Int32.Parse(reader[AnalyticMap.Names.analyticsId].ToString()),
+                    reader[AnalyticMap.Names.analyticsName].ToString(),
+                    reader[AnalyticMap.Names.analyticsDescription].ToString(),
                     reader[AnalyticMap.Names.refreshedText].ToString(),
                     reader[AnalyticMap.Names.createdText].ToString(),
                     reader[AnalyticMap.Names.editedText].ToString(),
@@ -163,8 +163,8 @@ namespace APLPromoter.Server.Data {
         }
         #endregion
 
-        #region Load Types...
-        public void LoadTypesMapParameters(Session<Server.Entity.Analytic.Identity> session, ref Server.Data.SqlService service) {
+        #region Load Drivers...
+        public void LoadDriversMapParameters(Session<Server.Entity.Analytic.Identity> session, ref Server.Data.SqlService service) {
 
             //Map the command...
             service.SqlProcedure = AnalyticMap.Names.selectCommand;
@@ -173,56 +173,56 @@ namespace APLPromoter.Server.Data {
             APLPromoter.Server.Data.SqlServiceParameter[] parameters = { 
                 new SqlServiceParameter(AnalyticMap.Names.id, SqlDbType.Int, 0, ParameterDirection.Input, session.Data.Id.ToString()),
                 new SqlServiceParameter(AnalyticMap.Names.sqlSession, SqlDbType.VarChar, 50, ParameterDirection.Input, session.SqlKey),
-                new SqlServiceParameter(AnalyticMap.Names.sqlMessage, SqlDbType.VarChar, 500, ParameterDirection.InputOutput, AnalyticMap.Names.loadTypesMessage)
+                new SqlServiceParameter(AnalyticMap.Names.sqlMessage, SqlDbType.VarChar, 500, ParameterDirection.InputOutput, AnalyticMap.Names.loadDriversMessage)
             }; service.sqlParameters.List = parameters;
 
         }
 
-        public List<Server.Entity.Analytic.Type> LoadTypesMapData(System.Data.DataTable data, Server.Data.SqlService service) {
+        public List<Server.Entity.Analytic.Driver> LoadTypesMapData(System.Data.DataTable data, Server.Data.SqlService service) {
 
             //Map the entity data...
             Boolean reading = true;
             Boolean selected = false;
             Int32 rows = data.Rows.Count;
-            String typeNow = String.Empty;
-            String typeLast = String.Empty;
+            String driverNow = String.Empty;
+            String driverLast = String.Empty;
             String modeNow = String.Empty;
             String modeLast = String.Empty;
-            List<Server.Entity.Analytic.Type> listTypes = new List<Analytic.Type>();
-            List<Server.Entity.Analytic.Type.Mode> listModes = new List<Analytic.Type.Mode>();
-            List<Server.Entity.Analytic.Type.Mode.Group> listGroups = new List<Analytic.Type.Mode.Group>();
+            List<Server.Entity.Analytic.Driver> listDrivers = new List<Analytic.Driver>();
+            List<Server.Entity.Analytic.Driver.Mode> listModes = new List<Analytic.Driver.Mode>();
+            List<Server.Entity.Analytic.Driver.Mode.Group> listGroups = new List<Analytic.Driver.Mode.Group>();
             System.Data.DataTableReader reader = data.CreateDataReader();
 
             //From record set...
             while (reading) {
                 reading = reader.Read();
-                typeNow = (reading) ? reader[AnalyticMap.Names.typeName].ToString() : String.Empty;
-                modeNow = (reading) ? reader[AnalyticMap.Names.typeModeName].ToString() : String.Empty;
+                driverNow = (reading) ? reader[AnalyticMap.Names.driverName].ToString() : String.Empty;
+                modeNow = (reading) ? reader[AnalyticMap.Names.driverModeName].ToString() : String.Empty;
 
                 if (reading) {
-                    listGroups.Add(new Analytic.Type.Mode.Group(
-                        Int32.Parse(reader[AnalyticMap.Names.typeGroupId].ToString()),
-                        Int32.Parse(reader[AnalyticMap.Names.typeGroupValue].ToString()),
-                        Decimal.Parse(reader[AnalyticMap.Names.typeGroupMinOutlier].ToString()),
-                        Decimal.Parse(reader[AnalyticMap.Names.typeGroupMaxOutlier].ToString())
+                    listGroups.Add(new Analytic.Driver.Mode.Group(
+                        Int32.Parse(reader[AnalyticMap.Names.driverGroupId].ToString()),
+                        Int32.Parse(reader[AnalyticMap.Names.driverGroupValue].ToString()),
+                        Decimal.Parse(reader[AnalyticMap.Names.driverGroupMinOutlier].ToString()),
+                        Decimal.Parse(reader[AnalyticMap.Names.driverGroupMaxOutlier].ToString())
                         ));
                     if (modeLast != modeNow) {
-                        listModes.Add(new Entity.Analytic.Type.Mode(
-                           Int32.Parse(reader[AnalyticMap.Names.typeModeKey].ToString()),
-                           reader[AnalyticMap.Names.typeModeName].ToString(), //Name
-                           reader[AnalyticMap.Names.typeModeName].ToString(), //Tooltip
-                           Boolean.Parse(reader[AnalyticMap.Names.typeModeIncluded].ToString()),
-                           new List<Analytic.Type.Mode.Group>()
+                        listModes.Add(new Entity.Analytic.Driver.Mode(
+                           Int32.Parse(reader[AnalyticMap.Names.driverModeKey].ToString()),
+                           reader[AnalyticMap.Names.driverModeName].ToString(), //Name
+                           reader[AnalyticMap.Names.driverModeName].ToString(), //Tooltip
+                           Boolean.Parse(reader[AnalyticMap.Names.driverModeIncluded].ToString()),
+                           new List<Analytic.Driver.Mode.Group>()
                             ));
                     }
-                    if (typeLast != typeNow) {
-                        listTypes.Add(new Entity.Analytic.Type(
-                            Int32.Parse(reader[AnalyticMap.Names.typeId].ToString()),
-                            Int32.Parse(reader[AnalyticMap.Names.typeKey].ToString()),
-                            reader[AnalyticMap.Names.typeName].ToString(), //Name
-                            reader[AnalyticMap.Names.typeName].ToString(), //Tooltip
-                            Boolean.Parse(reader[AnalyticMap.Names.typeIncluded].ToString()),
-                            new List<Analytic.Type.Mode>()
+                    if (driverLast != driverNow) {
+                        listDrivers.Add(new Entity.Analytic.Driver(
+                            Int32.Parse(reader[AnalyticMap.Names.driverId].ToString()),
+                            Int32.Parse(reader[AnalyticMap.Names.driverKey].ToString()),
+                            reader[AnalyticMap.Names.driverName].ToString(), //Name
+                            reader[AnalyticMap.Names.driverName].ToString(), //Tooltip
+                            Boolean.Parse(reader[AnalyticMap.Names.driverIncluded].ToString()),
+                            new List<Analytic.Driver.Mode>()
                             ));
                     }
                 }
@@ -236,25 +236,25 @@ namespace APLPromoter.Server.Data {
                         listGroups.RemoveRange(0, listGroups.Count - 1);
                     }
                 }
-                if (!(typeLast.Equals(String.Empty) || typeLast == typeNow)) {
-                    if (typeNow.Equals(String.Empty)) {
-                        listTypes[listTypes.Count - 1].Modes = listModes.GetRange(0, listModes.Count);
+                if (!(driverLast.Equals(String.Empty) || driverLast == driverNow)) {
+                    if (driverNow.Equals(String.Empty)) {
+                        listDrivers[listDrivers.Count - 1].Modes = listModes.GetRange(0, listModes.Count);
                     }
                     else {
-                        listTypes[listTypes.Count - 2].Modes = listModes.GetRange(0, listModes.Count - 1);
+                        listDrivers[listDrivers.Count - 2].Modes = listModes.GetRange(0, listModes.Count - 1);
                         listModes.RemoveRange(0, listModes.Count - 1);
                     }
                 }
-                typeLast = typeNow;
+                driverLast = driverNow;
                 modeLast = modeNow;
-                selected = Boolean.Parse(reader[AnalyticMap.Names.typeIncluded].ToString());
+                selected = Boolean.Parse(reader[AnalyticMap.Names.driverIncluded].ToString());
             }
-            return listTypes;
+            return listDrivers;
         }
         #endregion
 
-        #region Save Types...
-        public void SaveTypesMapParameters(Session<Server.Entity.Analytic> session, ref Server.Data.SqlService service) {
+        #region Save Drivers...
+        public void SaveDriversMapParameters(Session<Server.Entity.Analytic> session, ref Server.Data.SqlService service) {
 
             //Map the command...
             service.SqlProcedure = AnalyticMap.Names.updateCommand;
@@ -262,17 +262,17 @@ namespace APLPromoter.Server.Data {
             //Build comma delimited key list - type;mode;group;min;max, ...
             const System.Char splitter = ',';
             const System.Char delimiter = ';';
-            System.Text.StringBuilder typeKeys = new System.Text.StringBuilder();
-            foreach (Server.Entity.Analytic.Type type in session.Data.Types) {
-                if (type.Selected) {
-                    foreach (Server.Entity.Analytic.Type.Mode mode in type.Modes) {
+            System.Text.StringBuilder driverKeys = new System.Text.StringBuilder();
+            foreach (Server.Entity.Analytic.Driver driver in session.Data.Drivers) {
+                if (driver.Selected) {
+                    foreach (Server.Entity.Analytic.Driver.Mode mode in driver.Modes) {
                         if (mode.Selected) { 
-                            foreach (Server.Entity.Analytic.Type.Mode.Group group in mode.Groups) {
-                                typeKeys.Append(type.Key.ToString() + delimiter);
-                                typeKeys.Append(mode.Key.ToString() + delimiter);
-                                typeKeys.Append(group.Value.ToString() + delimiter);
-                                typeKeys.Append(group.MinOutlier.ToString() + delimiter);
-                                typeKeys.Append(group.MaxOutlier.ToString() + splitter);
+                            foreach (Server.Entity.Analytic.Driver.Mode.Group group in mode.Groups) {
+                                driverKeys.Append(driver.Key.ToString() + delimiter);
+                                driverKeys.Append(mode.Key.ToString() + delimiter);
+                                driverKeys.Append(group.Value.ToString() + delimiter);
+                                driverKeys.Append(group.MinOutlier.ToString() + delimiter);
+                                driverKeys.Append(group.MaxOutlier.ToString() + splitter);
                             }
                         }
                     }
@@ -281,9 +281,93 @@ namespace APLPromoter.Server.Data {
             //Map the parameters...
             APLPromoter.Server.Data.SqlServiceParameter[] parameters = { 
                 new SqlServiceParameter(AnalyticMap.Names.id, SqlDbType.Int, 0, ParameterDirection.Input, session.Data.Self.Id.ToString()),
-                new SqlServiceParameter(AnalyticMap.Names.types, SqlDbType.VarChar, 4000, ParameterDirection.Input, typeKeys.ToString()),
+                new SqlServiceParameter(AnalyticMap.Names.drivers, SqlDbType.VarChar, 4000, ParameterDirection.Input, driverKeys.ToString()),
                 new SqlServiceParameter(AnalyticMap.Names.sqlSession, SqlDbType.VarChar, 50, ParameterDirection.Input, session.SqlKey),
-                new SqlServiceParameter(AnalyticMap.Names.sqlMessage, SqlDbType.VarChar, 500, ParameterDirection.InputOutput, AnalyticMap.Names.saveTypesMessage)
+                new SqlServiceParameter(AnalyticMap.Names.sqlMessage, SqlDbType.VarChar, 500, ParameterDirection.InputOutput, AnalyticMap.Names.saveDriversMessage)
+            }; service.sqlParameters.List = parameters;
+        }
+        #endregion
+
+        #region Load Price lists...
+        public void LoadPricelistsMapParameters(Session<Server.Entity.Analytic.Identity> session, ref Server.Data.SqlService service) {
+
+            //Map the command...
+            service.SqlProcedure = AnalyticMap.Names.selectCommand;
+
+            //Map the parameters...
+            APLPromoter.Server.Data.SqlServiceParameter[] parameters = { 
+                new SqlServiceParameter(AnalyticMap.Names.id, SqlDbType.Int, 0, ParameterDirection.Input, session.Data.Id.ToString()),
+                new SqlServiceParameter(AnalyticMap.Names.sqlSession, SqlDbType.VarChar, 50, ParameterDirection.Input, session.SqlKey),
+                new SqlServiceParameter(AnalyticMap.Names.sqlMessage, SqlDbType.VarChar, 500, ParameterDirection.InputOutput, AnalyticMap.Names.loadPriceListsMessage)
+            }; service.sqlParameters.List = parameters;
+
+        }
+
+        public List<Server.Entity.PriceList> LoadPricelistsMapData(System.Data.DataTable data, Server.Data.SqlService service) {
+
+            //Map the entity data...
+            Boolean reading = true;
+            Int32 rows = data.Rows.Count;
+            String listTypeNow = String.Empty;
+            String listTypeLast = String.Empty;
+            List<Server.Entity.PriceList> priceLists = new List<Entity.PriceList>();
+            List<Server.Entity.PriceList.Value> listValues = new List<Entity.PriceList.Value>();
+            System.Data.DataTableReader reader = data.CreateDataReader();
+
+            //From record set...
+            while (reading) {
+                reading = reader.Read();
+                listTypeNow = (reading) ? reader[AnalyticMap.Names.priceListTypeName].ToString() : String.Empty;
+                if (reading) {
+                    listValues.Add(new Entity.PriceList.Value(
+                        Int32.Parse(reader[AnalyticMap.Names.priceListId].ToString()),
+                        Int32.Parse(reader[AnalyticMap.Names.priceListKey].ToString()),
+                        reader[AnalyticMap.Names.priceListCode].ToString(),
+                        reader[AnalyticMap.Names.priceListName].ToString(),
+                        Boolean.Parse(reader[AnalyticMap.Names.priceListIncluded].ToString())
+                        ));
+                    if (listTypeLast != listTypeNow) {
+                        priceLists.Add(new Entity.PriceList(
+                            reader[AnalyticMap.Names.priceListTypeName].ToString(),
+                            new List<PriceList.Value>()
+                            ));
+                    }
+                }
+                if (!(listTypeLast.Equals(String.Empty) || listTypeLast == listTypeNow)) {
+                    if (listTypeNow.Equals(String.Empty)) {
+                        priceLists[priceLists.Count - 1].Values = listValues.GetRange(0, listValues.Count);
+                    }
+                    else {
+                        priceLists[priceLists.Count - 2].Values = listValues.GetRange(0, listValues.Count - 1);
+                        listValues.RemoveRange(0, listValues.Count - 1);
+                    }
+                }
+                listTypeLast = listTypeNow;
+            }
+            return priceLists;
+        }
+        #endregion
+
+        #region Save Price lists...
+        public void SavePricelistsMapParameters(Session<Server.Entity.Analytic> session, ref Server.Data.SqlService service) {
+
+            //Map the command...
+            service.SqlProcedure = AnalyticMap.Names.updateCommand;
+
+            //Build comma delimited key list...
+            const System.Char delimiter = ',';
+            System.Text.StringBuilder priceKeys = new System.Text.StringBuilder();
+            foreach (Server.Entity.PriceList list in session.Data.PriceLists) {
+                foreach (Server.Entity.PriceList.Value value in list.Values) {
+                    if (!value.Included) { priceKeys.Append(value.Key.ToString() + delimiter); }
+                }
+            }
+            //Map the parameters...
+            APLPromoter.Server.Data.SqlServiceParameter[] parameters = { 
+                new SqlServiceParameter(AnalyticMap.Names.id, SqlDbType.Int, 0, ParameterDirection.Input, session.Data.Self.Id.ToString()),
+                new SqlServiceParameter(AnalyticMap.Names.pricelists, SqlDbType.VarChar, 4000, ParameterDirection.Input, priceKeys.ToString()),
+                new SqlServiceParameter(AnalyticMap.Names.sqlSession, SqlDbType.VarChar, 50, ParameterDirection.Input, session.SqlKey),
+                new SqlServiceParameter(AnalyticMap.Names.sqlMessage, SqlDbType.VarChar, 500, ParameterDirection.InputOutput, AnalyticMap.Names.savePriceListsMessage)
             }; service.sqlParameters.List = parameters;
         }
         #endregion
@@ -294,26 +378,36 @@ namespace APLPromoter.Server.Data {
             //Select commands...
             public const String selectCommand = "dbo.aplAnalyticsSelect";
             public const String loadIdentitiesMessage = "selectIdentities";
-            public const String loadTypesMessage = "selectTypes";
             public const String loadFilterMessage = "selectFilters";
+            public const String loadDriversMessage = "selectDrivers";
+            public const String loadPriceListsMessage = "selectPriceLists";
 
             //Update commands...
             public const String updateCommand = "dbo.aplAnalyticsUpdate";
             public const String saveIdentityMessage = "updateIdentity";
             public const String saveFiltersMessage = "updateFilters";
-            public const String saveTypesMessage = "updateTypes";
+            public const String saveDriversMessage = "updateDrivers";
+            public const String savePriceListsMessage = "updatePriceLists";
+
+            //Process commands...
+            public const String runProcessMarkup = "updateProcessMarkup";
+            public const String runProcessMovement = "updateProcessMover";
+            public const String runProcessDaysOnHand = "updateProcessDaysOnHand";
 
             //Default parameters...
             public const String id = "id";
-            public const String types = "typeKeys";
+            public const String name = "name";
+            public const String description = "description";
             public const String filters = "filterKeys";
+            public const String drivers = "driverKeys";
+            public const String pricelists = "priceListKeys";
             public const String sqlSession = "session";
             public const String sqlMessage = "message";
 
             #region Fields Identity...
-            public const String analyticId = "analyticId";
-            public const String name = "name";
-            public const String description = "description";
+            public const String analyticsId = "analyticsId";
+            public const String analyticsName = "analyticsName";
+            public const String analyticsDescription = "analyticsDescription";
             public const String refreshedText = "refreshedText";
             public const String createdText = "createdText";
             public const String editedText = "editedText";
@@ -327,34 +421,46 @@ namespace APLPromoter.Server.Data {
             #endregion
 
             #region Fields Filters...
-            public const String filterTypeName = "filterTypeText";
             public const String filterId = "filterId";
             public const String filterKey = "filterKey";
             public const String filterCode = "filterCode";
             public const String filterName = "filterText";
             public const String filterIncluded = "included";
+            public const String filterTypeName = "filterTypeText";
             #endregion
 
-            #region Fields Types...
-            public const String typeId = "typeId";
-            public const String typeKey = "typeKey";
-            public const String typeName = "typeText";
-            public const String typeModeKey = "modeKey";
-            public const String typeModeName = "modeText";
-            public const String typeGroupId = "groupId";
-            public const String typeGroupValue = "groupValue";
-            public const String typeGroupMinOutlier = "minOutlier";
-            public const String typeGroupMaxOutlier = "maxOutlier";
-            public const String typeIncluded = "typeIncluded";
-            public const String typeModeIncluded = "modeIncluded";
+            #region Fields Drivers...
+            public const String driverId = "driverId";
+            public const String driverKey = "driverKey";
+            public const String driverName = "driverText";
+            public const String driverModeKey = "modeKey";
+            public const String driverModeName = "modeText";
+            public const String driverGroupId = "groupId";
+            public const String driverGroupValue = "groupValue";
+            public const String driverGroupMinOutlier = "minOutlier";
+            public const String driverGroupMaxOutlier = "maxOutlier";
+            public const String driverIncluded = "driverIncluded";
+            public const String driverModeIncluded = "modeIncluded";
+            #endregion
+
+            #region Fields Pricelists...
+            public const String priceListId = "listId";
+            public const String priceListKey = "listKey";
+            public const String priceListCode = "listCode";
+            public const String priceListName = "listName";
+            public const String priceListText = "listText";
+            public const String priceListTypeId = "listTypeId";
+            public const String priceListTypeName = "listTypeName";
+            public const String priceListIncluded = "included";
             #endregion
         }
         #endregion
 
         #region Message map...
-        //selectIdentities  - id,name,description,refreshedText,createdText,editedText,refreshed,created,edited,authorText,editorText,ownerText,active
-        //selectTypes       - analyticsId,typeId,typeKey,typeText,modeKey,modeText,groupId,groupValue,minOutlier,maxOutlier,included
+        //selectIdentities  - analyticsId,analyticsName,analyticsDescription,refreshedText,createdText,editedText,refreshed,created,edited,authorText,editorText,ownerText,active
+        //selectDrivers     - analyticsId,driverId,driverKey,driverText,modeKey,modeText,groupId,groupValue,minOutlier,maxOutlier,driverIncluded,modeIncluded
         //selectFilters       - analyticsId,filterId,filterKey,filterCode,filterText,filterTypeId,filterTypeText,included
+        //selectPriceLists  - analyticsId,listId,listKey,listCode,listName,listText,listTypeId,listTypeName,included
         #endregion
 
         //TODO - Determine result view for validation; by workflow, validation messages, validation warnings, icons

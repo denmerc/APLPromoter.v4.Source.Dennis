@@ -9,8 +9,10 @@ namespace APLPromoter.Server.Data {
         Session<Server.Entity.Analytic.Identity> SaveIdentity(Session<Server.Entity.Analytic.Identity> session);
         Session<List<Server.Entity.Filter>> LoadFilters(Session<Server.Entity.Analytic.Identity> session);
         Session<List<Server.Entity.Filter>> SaveFilters(Session<Server.Entity.Analytic> session);
-        Session<List<Server.Entity.Analytic.Type>> LoadTypes(Session<Server.Entity.Analytic.Identity> session);
-        Session<List<Server.Entity.Analytic.Type>> SaveTypes(Session<Server.Entity.Analytic> session);
+        Session<List<Server.Entity.Analytic.Driver>> LoadDrivers(Session<Server.Entity.Analytic.Identity> session);
+        Session<List<Server.Entity.Analytic.Driver>> SaveDrivers(Session<Server.Entity.Analytic> session);
+        Session<List<Server.Entity.PriceList>> LoadPriceLists(Session<Server.Entity.Analytic.Identity> session);
+        Session<List<Server.Entity.PriceList>> SavePriceLists(Session<Server.Entity.Analytic> session);
     }
 
     public class AnalyticData : IAnalyticData {
@@ -27,8 +29,8 @@ namespace APLPromoter.Server.Data {
         private APLPromoter.Server.Data.SqlService sqlService;
 
         private readonly List<Analytic.Identity> _SavedAnalytics = new List<Analytic.Identity>();
+        private readonly List<Analytic.Driver> _SavedTypes = new List<Analytic.Driver>();
         private readonly List<Filter> _SavedFilters = new List<Filter>();
-        private readonly List<Analytic.Type> _SavedTypes = new List<Analytic.Type>();
         #endregion
 
         private String sqlConnection {
@@ -250,12 +252,12 @@ namespace APLPromoter.Server.Data {
             return sessionOut;
         }
 
-        public Session<List<Server.Entity.Analytic.Type>> LoadTypes(Session<Server.Entity.Analytic.Identity> sessionIn) {
+        public Session<List<Server.Entity.Analytic.Driver>> LoadDrivers(Session<Server.Entity.Analytic.Identity> sessionIn) {
 
             String sqlRequest = String.Empty;
             String sqlResponse = String.Empty;
             //Initialize session...
-            Session<List<Server.Entity.Analytic.Type>> sessionOut = new Session<List<Server.Entity.Analytic.Type>> {
+            Session<List<Server.Entity.Analytic.Driver>> sessionOut = new Session<List<Server.Entity.Analytic.Driver>> {
                 SessionOk = false,
                 ClientMessage = String.Empty,
                 ServerMessage = String.Empty,
@@ -268,7 +270,7 @@ namespace APLPromoter.Server.Data {
             };
 
             try {
-                sqlMapper.LoadTypesMapParameters(sessionIn, ref sqlService);
+                sqlMapper.LoadDriversMapParameters(sessionIn, ref sqlService);
                 System.Data.DataTable dataTable = sqlService.ExecuteReader();
                 if (sqlService.SqlStatusOk) {
                     sqlRequest = sqlService.sqlParameters[Data.AnalyticMap.Names.sqlMessage].dbValue;
@@ -299,12 +301,12 @@ namespace APLPromoter.Server.Data {
             return sessionOut;
         }
 
-        public Session<List<Server.Entity.Analytic.Type>> SaveTypes(Session<Server.Entity.Analytic> sessionIn) {
+        public Session<List<Server.Entity.Analytic.Driver>> SaveDrivers(Session<Server.Entity.Analytic> sessionIn) {
 
             String sqlRequest = String.Empty;
             String sqlResponse = String.Empty;
             //Initialize session...
-            Session<List<Server.Entity.Analytic.Type>> sessionOut = new Session<List<Server.Entity.Analytic.Type>> {
+            Session<List<Server.Entity.Analytic.Driver>> sessionOut = new Session<List<Server.Entity.Analytic.Driver>> {
                 SessionOk = false,
                 ClientMessage = String.Empty,
                 ServerMessage = String.Empty,
@@ -317,7 +319,7 @@ namespace APLPromoter.Server.Data {
             };
 
             try {
-                sqlMapper.SaveTypesMapParameters(sessionIn, ref sqlService);
+                sqlMapper.SaveDriversMapParameters(sessionIn, ref sqlService);
                 System.Data.DataTable dataTable = sqlService.ExecuteReader();
                 if (sqlService.SqlStatusOk) {
                     sqlRequest = sqlService.sqlParameters[Data.AnalyticMap.Names.sqlMessage].dbValue;
@@ -348,6 +350,102 @@ namespace APLPromoter.Server.Data {
             return sessionOut;
         }
 
+        public Session<List<Server.Entity.PriceList>> LoadPriceLists(Session<Server.Entity.Analytic.Identity> sessionIn) {
+            String sqlRequest = String.Empty;
+            String sqlResponse = String.Empty;
+            //Initialize session...
+            Session<List<Server.Entity.PriceList>> sessionOut = new Session<List<Server.Entity.PriceList>> {
+                SessionOk = false,
+                ClientMessage = String.Empty,
+                ServerMessage = String.Empty,
+                UserIdentity = sessionIn.UserIdentity,
+                AppOnline = sessionIn.AppOnline,
+                Authenticated = sessionIn.Authenticated,
+                SqlAuthorization = sessionIn.SqlAuthorization,
+                WinAuthorization = sessionIn.WinAuthorization,
+                SqlKey = sessionIn.SqlKey
+            };
+
+            try {
+                sqlMapper.LoadPricelistsMapParameters(sessionIn, ref sqlService);
+                System.Data.DataTable dataTable = sqlService.ExecuteReader();
+                if (sqlService.SqlStatusOk) {
+                    sqlRequest = sqlService.sqlParameters[Data.AnalyticMap.Names.sqlMessage].dbValue;
+                    sqlResponse = sqlService.sqlParameters[Data.AnalyticMap.Names.sqlMessage].dbOutput;
+                    if (sqlRequest == sqlResponse) {
+                        sessionOut.Data = sqlMapper.LoadPricelistsMapData(dataTable, sqlService);
+                        sessionOut.SessionOk = true;
+                    }
+                }
+            }
+            catch (Exception ex) {
+                sessionOut.ServerMessage = String.Format("{0}: {1}, {2}, {3}, {4} ", aplServiceEventLog, sqlService.SqlProcedure, sqlRequest, ex.Source, ex.Message);
+                localServiceLog.WriteEntry(sessionOut.ServerMessage, System.Diagnostics.EventLogEntryType.FailureAudit);
+            }
+            finally {
+                //SQL Service error...
+                if (!sqlService.SqlStatusOk) {
+                    sessionOut.SessionOk = sqlService.SqlStatusOk;
+                    sessionOut.ClientMessage = sqlService.SqlStatusMessage;
+                    sessionOut.ServerMessage = String.Format("{0}: {1}, {2}, {3} ", aplServiceEventLog, sqlService.SqlProcedure, sqlRequest, sqlService.SqlStatusMessage);
+                }
+                //SQL Validation warning...
+                else if (sqlRequest != sqlResponse) {
+                    sessionOut.ClientMessage = sqlResponse;
+                }
+            }
+
+            return sessionOut;
+        }
+
+        public Session<List<Server.Entity.PriceList>> SavePriceLists(Session<Server.Entity.Analytic> sessionIn) {
+
+            String sqlRequest = String.Empty;
+            String sqlResponse = String.Empty;
+            //Initialize session...
+            Session<List<Server.Entity.PriceList>> sessionOut = new Session<List<Server.Entity.PriceList>> {
+                SessionOk = false,
+                ClientMessage = String.Empty,
+                ServerMessage = String.Empty,
+                UserIdentity = sessionIn.UserIdentity,
+                AppOnline = sessionIn.AppOnline,
+                Authenticated = sessionIn.Authenticated,
+                SqlAuthorization = sessionIn.SqlAuthorization,
+                WinAuthorization = sessionIn.WinAuthorization,
+                SqlKey = sessionIn.SqlKey
+            };
+
+            try {
+                sqlMapper.SavePricelistsMapParameters(sessionIn, ref sqlService);
+                System.Data.DataTable dataTable = sqlService.ExecuteReader();
+                if (sqlService.SqlStatusOk) {
+                    sqlRequest = sqlService.sqlParameters[Data.AnalyticMap.Names.sqlMessage].dbValue;
+                    sqlResponse = sqlService.sqlParameters[Data.AnalyticMap.Names.sqlMessage].dbOutput;
+                    if (sqlRequest == sqlResponse) {
+                        sessionOut.Data = sqlMapper.LoadPricelistsMapData(dataTable, sqlService);
+                        sessionOut.SessionOk = true;
+                    }
+                }
+            }
+            catch (Exception ex) {
+                sessionOut.ServerMessage = String.Format("{0}: {1}, {2}, {3}, {4} ", aplServiceEventLog, sqlService.SqlProcedure, sqlRequest, ex.Source, ex.Message);
+                localServiceLog.WriteEntry(sessionOut.ServerMessage, System.Diagnostics.EventLogEntryType.FailureAudit);
+            }
+            finally {
+                //SQL Service error...
+                if (!sqlService.SqlStatusOk) {
+                    sessionOut.SessionOk = sqlService.SqlStatusOk;
+                    sessionOut.ClientMessage = sqlService.SqlStatusMessage;
+                    sessionOut.ServerMessage = String.Format("{0}: {1}, {2}, {3} ", aplServiceEventLog, sqlService.SqlProcedure, sqlRequest, sqlService.SqlStatusMessage);
+                }
+                //SQL Validation warning...
+                else if (sqlRequest != sqlResponse) {
+                    sessionOut.ClientMessage = sqlResponse;
+                }
+            }
+
+            return sessionOut;
+        }
     }
 
 }
