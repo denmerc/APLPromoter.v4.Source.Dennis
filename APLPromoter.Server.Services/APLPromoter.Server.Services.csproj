@@ -45,7 +45,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Services.Analytic.cs" />
+    <Compile Include="Services.Analytics.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services.User.cs" />
   </ItemGroup>

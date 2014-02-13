@@ -45,7 +45,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Contracts.Analytic.cs" />
+    <Compile Include="Contracts.Analytics.cs" />
     <Compile Include="Contracts.User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
