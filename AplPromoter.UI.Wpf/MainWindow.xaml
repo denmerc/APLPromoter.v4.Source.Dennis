@@ -4,7 +4,7 @@
                 xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
                 Title="Promoter" Height="350" Width="525" MinHeight="500" MinWidth="750"
                 xmlns:Xaml="clr-namespace:ReactiveUI.Xaml;assembly=ReactiveUI.Xaml"
-                xmlns:vm="clr-namespace:APLPromoter.UI.Wpf.ViewModel" WindowStartupLocation="CenterScreen" Topmost="True">
+                xmlns:vm="clr-namespace:APLPromoter.UI.Wpf.ViewModel" WindowStartupLocation="CenterScreen">
                 <!--DataContext="{Binding Source={StaticResource Locator}}"-->
     <Grid>
         <Xaml:RoutedViewHost Router="{Binding Router}" />

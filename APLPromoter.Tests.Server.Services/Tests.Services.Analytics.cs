@@ -262,7 +262,7 @@ namespace APLPromoter.Tests.Server.Services
 
             //LoadTypes
             Session<List<Analytic.Driver>> responseLoadTypes = 
-                _AnalyticService.LoadTypes(new Session<Analytic.Identity>{SqlKey = SQLKEY_ADMIN, Data = validAnalytic});
+                _AnalyticService.LoadDrivers(new Session<Analytic.Identity>{SqlKey = SQLKEY_ADMIN, Data = validAnalytic});
             var selectedType = responseLoadTypes.Data.FirstOrDefault();
             var list = new List<Analytic.Driver>();
             //Modify
@@ -334,7 +334,7 @@ namespace APLPromoter.Tests.Server.Services
                 //}
  
             //Act
-            var responseSaveTypes = _AnalyticService.SaveTypes(new Session<Analytic> { SqlKey = SQLKEY_ADMIN, Data = analytic });
+            var responseSaveTypes = _AnalyticService.SaveDrivers(new Session<Analytic> { SqlKey = SQLKEY_ADMIN, Data = analytic });
             //Assert
             responseSaveTypes.SessionOk.Should().BeTrue();
             responseSaveTypes.ClientMessage.Should().BeBlank();             
@@ -384,7 +384,7 @@ namespace APLPromoter.Tests.Server.Services
                 }
             };
             //Act
-            var response = _AnalyticService.SaveTypes(new Session<Analytic> { SqlKey = SQLKEY_ADMIN, Data = analytic });
+            var response = _AnalyticService.SaveDrivers(new Session<Analytic> { SqlKey = SQLKEY_ADMIN, Data = analytic });
             //Assert
             response.SessionOk.Should().BeFalse();
             response.ClientMessage.Should().NotBeBlank();
@@ -428,7 +428,7 @@ namespace APLPromoter.Tests.Server.Services
                 }
             };
             //Act
-            var response = _AnalyticService.SaveTypes(new Session<Analytic> { SqlKey = SQLKEY_ADMIN, Data = analytic });
+            var response = _AnalyticService.SaveDrivers(new Session<Analytic> { SqlKey = SQLKEY_ADMIN, Data = analytic });
             //Assert
             response.SessionOk.Should().BeFalse();
             response.ClientMessage.Should().NotBeBlank();
@@ -471,7 +471,7 @@ namespace APLPromoter.Tests.Server.Services
                 }
             };
             //Act
-            var response = _AnalyticService.SaveTypes(new Session<Analytic> { SqlKey = SQLKEY_ADMIN, Data = analytic });
+            var response = _AnalyticService.SaveDrivers(new Session<Analytic> { SqlKey = SQLKEY_ADMIN, Data = analytic });
             //Assert
             response.ServerMessage.Should().Contain("Analytic.Types.Save - Invalid Groups");
         }
@@ -532,7 +532,7 @@ namespace APLPromoter.Tests.Server.Services
                 }
             };
             //Act
-            var response = _AnalyticService.SaveTypes(new Session<Analytic> { SqlKey = SQLKEY_ADMIN, Data = analytic });
+            var response = _AnalyticService.SaveDrivers(new Session<Analytic> { SqlKey = SQLKEY_ADMIN, Data = analytic });
             //Assert
             response.ServerMessage.Should().Contain("Analytic.Types.Save - Invalid Groups");
         

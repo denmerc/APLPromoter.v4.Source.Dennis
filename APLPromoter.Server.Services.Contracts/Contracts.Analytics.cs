@@ -20,9 +20,9 @@ namespace APLPromoter.Server.Services.Contracts
         [OperationContract]
         Session<List<Server.Entity.Filter>> SaveFilters(Session<Server.Entity.Analytic> session);
         [OperationContract]
-        Session<List<Server.Entity.Analytic.Driver>> LoadTypes(Session<Server.Entity.Analytic.Identity> session);
+        Session<List<Server.Entity.Analytic.Driver>> LoadDrivers(Session<Server.Entity.Analytic.Identity> session);
         [OperationContract]
-        Session<List<Server.Entity.Analytic.Driver>> SaveTypes(Session<Server.Entity.Analytic> session);
+        Session<List<Server.Entity.Analytic.Driver>> SaveDrivers(Session<Server.Entity.Analytic> session);
 
     }
 }
