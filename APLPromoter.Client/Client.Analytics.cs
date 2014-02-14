@@ -39,5 +39,16 @@ namespace APLPromoter.Client
         {
             return Channel.SaveDrivers(session);
         }
+
+
+        public Session<List<PriceList>> LoadPriceLists(Session<Analytic.Identity> session)
+        {
+            return Channel.LoadPriceLists(session);
+        }
+
+        public Session<List<PriceList>> SavePriceLists(Session<Analytic> session)
+        {
+            return Channel.SavePriceLists(session);
+        }
     }
 }

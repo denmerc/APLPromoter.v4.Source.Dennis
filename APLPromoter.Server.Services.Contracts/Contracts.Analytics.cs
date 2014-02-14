@@ -23,6 +23,10 @@ namespace APLPromoter.Server.Services.Contracts
         Session<List<Server.Entity.Analytic.Driver>> LoadDrivers(Session<Server.Entity.Analytic.Identity> session);
         [OperationContract]
         Session<List<Server.Entity.Analytic.Driver>> SaveDrivers(Session<Server.Entity.Analytic> session);
+        [OperationContract]
+        Session<List<Server.Entity.PriceList>> LoadPriceLists(Session<Server.Entity.Analytic.Identity> session);
+        [OperationContract]
+        Session<List<Server.Entity.PriceList>> SavePriceLists(Session<Server.Entity.Analytic> session);
 
     }
 }

@@ -55,5 +55,16 @@ namespace APLPromoter.Server.Services
         {
             return _analyticRepo.SaveDrivers(session);
         }
+
+
+        public Session<List<PriceList>> LoadPriceLists(Session<Analytic.Identity> session)
+        {
+            return _analyticRepo.LoadPriceLists(session);
+        }
+
+        public Session<List<PriceList>> SavePriceLists(Session<Analytic> session)
+        {
+            return _analyticRepo.SavePriceLists(session);
+        }
     }
 }
