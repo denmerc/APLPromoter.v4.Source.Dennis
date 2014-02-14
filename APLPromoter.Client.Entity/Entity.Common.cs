@@ -115,46 +115,35 @@ namespace APLPromoter.Client.Entity
         #region Initialize...
         public Workflow() { }
         public Workflow(
-            System.Type Type,
-            String Name,
-            String Title,
-            Int32 Step,
-            Int32 Next,
-            Int32 Previous,
-            Boolean Active,
-            Boolean Valid,
-            List<Validation> Response
-            ) {
-            this.Type = Type;
-            this.Name = Name;
-            this.Title = Title;
-            this.Step = Step;
-            this.Next = Next;
-            this.Previous = Previous;
-            this.Active = Active;
-            this.Valid = Valid;
-            this.Response = Response;
+            string caption,
+            WorkflowType workflowType,
+            List<Step> steps
+        ) 
+        {
+            this.IsWorkflowValid = false;
+            this.WorkflowType = workflowType;
+            this.Caption = caption;
+            this.Steps = steps;
         }
         #endregion
 
         [DataMember]
-        public System.Type Type;
+        public WorkflowType WorkflowType;
         [DataMember]
-        public String Name;
+        public string Caption;
         [DataMember]
-        public String Title;
+        public List<Step> Steps;
+        public Step NextStep;
         [DataMember]
-        public Int32 Step;
+        public Step PreviousStep;
         [DataMember]
-        public Int32 Next;
+        public Step CurrentStep { get; set; }
         [DataMember]
-        public Int32 Previous;
+        public Boolean IsWorkflowValid;
         [DataMember]
-        public Boolean Valid;
-        [DataMember]
-        public Boolean Active { get; set; }
-        [DataMember]
-        public List<Validation> Response;
+        public List<Validation> ValidationMessages;
+
+
 
         [DataContract]
         public class Validation
@@ -173,7 +162,7 @@ namespace APLPromoter.Client.Entity
                 this.Fault = Fault;
             }
             #endregion
-
+            
             [DataMember]
             public Int32 Id;
             [DataMember]
@@ -183,5 +172,40 @@ namespace APLPromoter.Client.Entity
             [DataMember]
             public Boolean Fault;
         }
+    }
+
+
+    public enum WorkflowType
+    {
+        Login = 0,
+        Analytic,
+        Pricing,
+        Administration
+
+    }
+
+    [DataContract]
+    public class Step{
+        [DataMember]
+        public Steps StepType;
+        [DataMember]
+        public String Name;
+        [DataMember]
+        public String Caption;
+        [DataMember]
+        public Int32 Ordinal;
+        [DataMember]
+        public Boolean IsValid;
+    }
+
+
+
+
+    public enum Steps
+    {
+        Initialization = 0,
+        Authentication,
+        PasswordChange
+
     }
 }

@@ -16,10 +16,12 @@ namespace APLPromoter.UI.Wpf.Views
             
             this.WhenAnyValue(x => x.ViewModel).BindTo(this, x => x.DataContext);
             this.Bind(ViewModel, model => model.Password, x => x.password.Text);
+            this.Bind(ViewModel, model => model.NewPassword, x => x.newPassword.Text);
             this.Bind(ViewModel, model => model.LoginName, view => view.userName.Text);
             this.OneWayBind(ViewModel, model => model.Message, x => x.message.Content);
             this.OneWayBind(ViewModel, model => model.InitializationMessage, x => x.xInitializationMessage.Content);
             this.OneWayBind(ViewModel, x => x.LoginCommand, x => x.login.Command);
+            this.OneWayBind(ViewModel, x => x.ChangePasswordCommand, x => x.changePassword.Command);
 
             this.OneWayBind(ViewModel, model => model.IsProgressRunning, x => x.xProgress.IsIndeterminate);
             //this.OneWayBind(ViewModel, model => model.ProgressBrush, x => x.xProgress.Foreground);

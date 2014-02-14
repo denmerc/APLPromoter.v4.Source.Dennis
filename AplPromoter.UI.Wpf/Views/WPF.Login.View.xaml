@@ -49,10 +49,13 @@
                 <TextBox x:Name="userName" />
                 <TextBlock Text="Password:" />
                 <TextBox x:Name="password" />
-                <!--<TextBox x:Name="message" BorderBrush="White" IsReadOnly="True" IsEnabled="False"/>-->
+                    <TextBlock Text="New Password:" />
+                    <TextBox x:Name="newPassword" />
+                    <!--<TextBox x:Name="message" BorderBrush="White" IsReadOnly="True" IsEnabled="False"/>-->
                 <Label x:Name="message" BorderBrush="White" Background="White" Height="30"  IsEnabled="true" Margin="1,0,4,0"/>
                 <Button x:Name="login" Content="Login"/>
-            </StackPanel>
+                <Button x:Name="changePassword" Content="Change Password"/>
+                </StackPanel>
         </Border>
     </Grid>
 

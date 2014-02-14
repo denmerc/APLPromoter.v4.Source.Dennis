@@ -1,4 +1,3 @@
-using Promoter.Domain;
 using APLPromoter.UI.Wpf.Views;
 using ReactiveUI;
 using System.Collections.ObjectModel;
@@ -60,7 +59,7 @@ namespace APLPromoter.UI.Wpf.ViewModel
         }
         public ReactiveCommand Navigate { get; set; }
         public ReactiveCommand Refresh { get; set; }
-        public ObservableCollection<Promoter.Domain.Analytic> Analytics { get; set; }
+        public ObservableCollection<Analytic> Analytics { get; set; }
         public ObservableCollection<PriceRoutine> PriceRoutines { get; set; }
 
         public void ChangeViewModel(ReactiveObject viewModel)
@@ -70,36 +69,70 @@ namespace APLPromoter.UI.Wpf.ViewModel
             SelectedViewModel = NavigatedViewModels.FirstOrDefault(vm => vm == viewModel);
 
         }
-        public ObservableCollection<Promoter.Domain.Analytic> LoadAnalytics()
+        public ObservableCollection<Analytic> LoadAnalytics()
         {
-            return new ObservableCollection<Promoter.Domain.Analytic>()
+            return new ObservableCollection<Analytic>()
             {
-                new Promoter.Domain.Analytic {Id=1, Name="Analytic Name 1", Description = "Description1"},
-                new Promoter.Domain.Analytic {Id=2, Name="Analytic Name 2", Description = "Description2"},
-                new Promoter.Domain.Analytic {Id=3, Name="Analytic Name 3", Description = "Description3"},
-                new Promoter.Domain.Analytic {Id=4, Name="Analytic Name 4", Description = "Description4"},
-                new Promoter.Domain.Analytic {Id=5, Name="Analytic Name 5", Description = "Description5"},
-                new Promoter.Domain.Analytic {Id=6, Name="Analytic Name 6", Description = "Description6"},
-                new Promoter.Domain.Analytic {Id=7, Name="Analytic Name 7", Description = "Desctiption7"}
+                new Analytic {Id=1, Name="Analytic Name 1", Description = "Description1"},
+                new Analytic {Id=2, Name="Analytic Name 2", Description = "Description2"},
+                new Analytic {Id=3, Name="Analytic Name 3", Description = "Description3"},
+                new Analytic {Id=4, Name="Analytic Name 4", Description = "Description4"},
+                new Analytic {Id=5, Name="Analytic Name 5", Description = "Description5"},
+                new Analytic {Id=6, Name="Analytic Name 6", Description = "Description6"},
+                new Analytic {Id=7, Name="Analytic Name 7", Description = "Desctiption7"}
             }; 
         }
 
-        public ObservableCollection<Promoter.Domain.PriceRoutine> LoadPriceRoutines()
+        public ObservableCollection<PriceRoutine> LoadPriceRoutines()
         {
-            return new ObservableCollection<Promoter.Domain.PriceRoutine>()
+            return new ObservableCollection<PriceRoutine>()
             {
-                new Promoter.Domain.PriceRoutine {Id=1, Name="Price Routine Name1", Description = "Description1"},
-                new Promoter.Domain.PriceRoutine {Id=2, Name="Price Routine Name2", Description = "Description2"},
-                new Promoter.Domain.PriceRoutine {Id=3, Name="Price Routine Name3", Description = "Description3"},
-                new Promoter.Domain.PriceRoutine {Id=4, Name="Price Routine Name4", Description = "Description4"},
-                new Promoter.Domain.PriceRoutine {Id=5, Name="Price Routine Name5", Description = "Description5"},
-                new Promoter.Domain.PriceRoutine {Id=6, Name="Price Routine Name6", Description = "Description6"},
-                new Promoter.Domain.PriceRoutine {Id=7, Name="Price Routine Name7", Description = "Desctiption7"}
+                new PriceRoutine {Id=1, Name="Price Routine Name1", Description = "Description1"},
+                new PriceRoutine {Id=2, Name="Price Routine Name2", Description = "Description2"},
+                new PriceRoutine {Id=3, Name="Price Routine Name3", Description = "Description3"},
+                new PriceRoutine {Id=4, Name="Price Routine Name4", Description = "Description4"},
+                new PriceRoutine {Id=5, Name="Price Routine Name5", Description = "Description5"},
+                new PriceRoutine {Id=6, Name="Price Routine Name6", Description = "Description6"},
+                new PriceRoutine {Id=7, Name="Price Routine Name7", Description = "Desctiption7"}
             };
         }
+
+        //public string LoadXml()
+        //{
+        //    //Locator.UserService.LoadExplorerPlanning()
+        //}
     }
     public class TrackingTreeSource
     {
-        public ObservableCollection<Promoter.Domain.Analytic> Analytics { get; set; }
+        public ObservableCollection<Analytic> Analytics { get; set; }
     }
+}
+
+
+public class Analytic
+{
+    public int Id { get; set; }
+    public string Name { get; set; }
+    public string Description { get; set; }
+}
+
+public class PriceRoutine
+{
+    public int Id { get; set; }
+    public string Name { get; set; }
+    public string Description { get; set; }
+}
+
+public class Filter
+{
+    public int Id { get; set; }
+    public string Name { get; set; }
+    public string Description { get; set; }
+}
+
+public class Type
+{
+    public int Id { get; set; }
+    public string Name { get; set; }
+    public string Description { get; set; }
 }

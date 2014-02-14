@@ -62,6 +62,14 @@ namespace APLPromoter.UI.Wpf.ViewModel
             }
         }
 
+        public IAnalyticService AnalyticService
+        {
+            get
+            {
+                return kernel.Get<IAnalyticService>();
+            }
+        }
+
         public static void Cleanup()
         {
             // TODO Clear the ViewModels

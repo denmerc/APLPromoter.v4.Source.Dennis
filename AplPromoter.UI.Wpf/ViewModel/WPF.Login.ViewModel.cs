@@ -1,21 +1,22 @@
 ﻿using APLPromoter.Client.Contracts;
 using APLPromoter.Client.Entity;
-using APLPromoter.Core.UI;
 using ReactiveUI;
 using System;
-using System.Reactive.Linq;
+using System.Collections.Generic;
 using System.Configuration;
 using System.Threading.Tasks;
-using System.Configuration;
 using System.Windows;
 using System.Windows.Media;
+using System.Linq;
+
 
 namespace APLPromoter.UI.Wpf.ViewModel
 {
     public class LoginViewModel : ReactiveObject , IRoutableViewModel
     {
         //APLPromoter.Client.UserClient _proxy = new APLPromoter.Client.UserClient();
-        public LoginViewModel(IScreen hostScreen , MainViewModel appRootViewModel, IUserService userService)
+        public LoginViewModel(IScreen hostScreen, MainViewModel appRootViewModel, 
+                                IUserService userService)
         {
             HostScreen = hostScreen;
             //UserService = new UserService();
@@ -24,8 +25,9 @@ namespace APLPromoter.UI.Wpf.ViewModel
 
             var canLogin = this.WhenAny(x => x.LoginName, x => x.Password, (l, p) =>
                 !String.IsNullOrWhiteSpace(l.Value) && !String.IsNullOrWhiteSpace(p.Value));
-
+            
             LoginCommand = new ReactiveCommand(canLogin);
+            ChangePasswordCommand = new ReactiveCommand(canLogin);
             
             //Reset to initialize view
             SplashVisible = Visibility.Visible; //TODO: Add bool to visibility converter
@@ -34,20 +36,28 @@ namespace APLPromoter.UI.Wpf.ViewModel
             IsProgressRunning = true;
             
 
-            TaskScheduler _currentScheduler = TaskScheduler.FromCurrentSynchronizationContext();
+            
+            //Steps
+            LoginSteps = new List<Step> {
+                new Step{ Ordinal = 1, StepType = Steps.Initialization, Caption = "Initalizing", IsValid = false, },
+                new Step{ Ordinal = 2, StepType = Steps.Authentication, Caption = string.Empty, IsValid = false },
+                new Step{ Ordinal = 3, StepType = Steps.PasswordChange, Caption = string.Empty, IsValid = false}
+            };
+            
+           
 
+            TaskScheduler _currentScheduler = TaskScheduler.FromCurrentSynchronizationContext();
             Task<Session<NullT>> initialized = Initialize();
 
             initialized.ContinueWith(t =>
                         {
                             try
                             {
-                               
-                                
                                 Session = t.Result ;
                                 if (Session == null || Session.AppOnline == false) //invalid session prompt to reconnect
                                 {
                                     InitializationMessage = "Connection failed"; //send failed event message
+                                    ToggleStepStatus(Steps.Initialization, false, "Connection failed. Try again?");
                                     IsProgressRunning = false;
                                     ProgressBrush = Brushes.Red;
                                 }
@@ -63,42 +73,71 @@ namespace APLPromoter.UI.Wpf.ViewModel
                             {
 
                                 InitializationMessage = "Connection failed.";
+                                ToggleStepStatus(Steps.Initialization, false, "Connection failed. Try again?");
                                 IsProgressRunning = false;
-                                
-                                
+
                             }
                             
                         }, _currentScheduler);
 
 
+            //handle initialization errors
+            initialized.ContinueWith(t => Console.WriteLine("test"), TaskContinuationOptions.OnlyOnFaulted);
+
+
 
             var loggedIn = LoginCommand.RegisterAsyncTask(async _ =>
                             {
-                                
-
                                 Message = "Authenticating....";
-                                var authenticated = await Authenticate(LoginName, Password);
+                                ToggleStepStatus(Steps.Authentication, false, "Authenticating...");
+                                var session = await Authenticate(LoginName, Password);
                                 //var message = await InitializeAndLoginAsync();
 
-                                if (authenticated)
+                                if (session.Authenticated)
                                 {
                                     HostScreen.Router.Navigate.Execute(Application);
                                 }
                                 else
                                 {
                                     Message = "Login Failed";
+                                    ToggleStepStatus(Steps.Authentication, false, "Login failed.");
                                     Password = string.Empty;
                                     LoginName = LoginName;
                                 }
-                                
-
-
                             });
 
+            var changingPassword = ChangePasswordCommand.RegisterAsyncTask(async _ =>
+                {
+                            var authResponse = await Authenticate(LoginName, Password);
 
-            
+                            if (authResponse.Authenticated)
+                            {
+                                ToggleStepStatus(Steps.Authentication, true, "Login Successful.");
+                                    
+                                var changeResponse = await ChangePassword(LoginName, Password, 
+                                                 NewPassword);
+                                if(changeResponse.SessionOk)
+                                {
+                                    ToggleStepStatus(Steps.Authentication, true, "Password Successfully Changed");
+                                }
+                            }
+
+                 });
+
+            ChangePasswordCommand.ThrownExceptions.Subscribe(ex => {
+                
+                //Logout
+                //Reset steps
+
+            });
+     }
+
+        public void ToggleStepStatus(Steps step, bool isValid, string caption)
+        {
+            var st = LoginSteps.FirstOrDefault(s => s.StepType == step);
+            st.IsValid = isValid;
+            st.Caption = caption;
         }
-
 
         public async Task<Session<NullT>> Initialize()
         {
@@ -112,7 +151,7 @@ namespace APLPromoter.UI.Wpf.ViewModel
             });
         }
 
-        public async Task<bool> Authenticate(string loginName, string password)
+        public async Task<Session<NullT>> Authenticate(string loginName, string password)
         {
             return await Task.Run(() =>
             {
@@ -126,12 +165,48 @@ namespace APLPromoter.UI.Wpf.ViewModel
                 };
 
 
-                return authenticated = UserService.Authenticate(Session).Authenticated; //TODO:Using and Dispose of proxy.
+
+                return UserService.Authenticate(Session); //TODO:Using and Dispose of proxy.
 
 
             });
         }
 
+        public async Task<Session<NullT>> ChangePassword(string loginName, string password, string newPassword)
+        {
+            return await Task.Run(() =>
+            {
+
+                try
+                {
+                    
+                    Session.UserIdentity = new User.Identity
+                    {
+                        Login = loginName,
+                        Password = new User.Password { Old = Password, New = newPassword }
+                    };
+                    return UserService.SavePassword(Session);
+                }
+                catch (Exception)
+                {
+                    throw;
+                }
+
+            });
+        }
+
+        List<Step> _steps;
+        public List<Step> LoginSteps
+        {
+            get
+            {
+                return _steps;
+            }
+            set
+            {
+                this.RaiseAndSetIfChanged(ref _steps, value);
+            }
+        }
 
         Session<NullT> _session;
         public Session<NullT> Session
@@ -139,7 +214,7 @@ namespace APLPromoter.UI.Wpf.ViewModel
             get
             { return _session; }
             set { this.RaiseAndSetIfChanged(ref _session, value); }
-        }
+        } //TODO: move to ViewModelLocator
         
 
         IUserService _userService;
@@ -189,7 +264,8 @@ namespace APLPromoter.UI.Wpf.ViewModel
             get
             { 
 
-                return IsProgressRunning ? (SolidColorBrush)(new BrushConverter().ConvertFrom("#FFABABAB")) : Brushes.Red; 
+                return IsProgressRunning ? (SolidColorBrush)(new BrushConverter()
+                    .ConvertFrom("#FFABABAB")) : Brushes.Red; 
             
             }
             set { this.RaiseAndSetIfChanged(ref _progressBrush, value); }
@@ -210,8 +286,16 @@ namespace APLPromoter.UI.Wpf.ViewModel
             set { this.RaiseAndSetIfChanged(ref _password, value); }
         }
 
+        string _newPassword;
+        public string NewPassword
+        {
+            get { return _newPassword; }
+            set { this.RaiseAndSetIfChanged(ref _newPassword, value); }
+        }
+
 
         public ReactiveCommand LoginCommand { get; set; }
+        public ReactiveCommand ChangePasswordCommand { get; set; }
 
         public IScreen HostScreen { get; private set; }
 
@@ -237,3 +321,8 @@ namespace APLPromoter.UI.Wpf.ViewModel
 
     }
 }
+
+
+
+
+
