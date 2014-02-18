@@ -39,9 +39,9 @@ namespace APLPromoter.UI.Wpf.ViewModel
             
             //Steps
             LoginSteps = new List<Step> {
-                new Step{ Ordinal = 1, StepType = Steps.Initialization, Caption = "Initalizing", IsValid = false, },
-                new Step{ Ordinal = 2, StepType = Steps.Authentication, Caption = string.Empty, IsValid = false },
-                new Step{ Ordinal = 3, StepType = Steps.PasswordChange, Caption = string.Empty, IsValid = false}
+                new Step{ StepType = Steps.Initialization, Caption = "Initalizing", IsValid = false, },
+                new Step{ StepType = Steps.Authentication, Caption = string.Empty, IsValid = false },
+                new Step{ StepType = Steps.PasswordChange, Caption = string.Empty, IsValid = false}
             };
             
            
@@ -292,6 +292,19 @@ namespace APLPromoter.UI.Wpf.ViewModel
             get { return _newPassword; }
             set { this.RaiseAndSetIfChanged(ref _newPassword, value); }
         }
+
+        string _confirmPassword;
+        public string confirmPassword
+        {
+            get { return _newPassword; }
+            set { this.RaiseAndSetIfChanged(ref _confirmPassword, value); }
+        }
+
+
+
+
+        
+
 
 
         public ReactiveCommand LoginCommand { get; set; }

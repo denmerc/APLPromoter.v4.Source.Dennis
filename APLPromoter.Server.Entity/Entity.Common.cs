@@ -115,73 +115,93 @@ namespace APLPromoter.Server.Entity
         #region Initialize...
         public Workflow() { }
         public Workflow(
-            System.Type Type,
-            String Name,
             String Title,
-            Int32 Step,
-            Int32 Next,
-            Int32 Previous,
-            Boolean Active,
-            Boolean Valid,
-            List<Validation> Response
-            ) {
-            this.Type = Type;
-            this.Name = Name;
+            List<Step> Steps
+            )
+        {
             this.Title = Title;
-            this.Step = Step;
-            this.Next = Next;
-            this.Previous = Previous;
-            this.Active = Active;
-            this.Valid = Valid;
-            this.Response = Response;
+            this.Steps = Steps;
         }
         #endregion
 
         [DataMember]
-        public System.Type Type;
-        [DataMember]
-        public String Name;
-        [DataMember]
         public String Title;
         [DataMember]
-        public Int32 Step;
-        [DataMember]
-        public Int32 Next;
-        [DataMember]
-        public Int32 Previous;
-        [DataMember]
-        public Boolean Valid;
-        [DataMember]
-        public Boolean Active { get; set; }
-        [DataMember]
-        public List<Validation> Response;
+        public List<Step> Steps;
 
         [DataContract]
-        public class Validation
+        public class Step
         {
             #region Initialize...
-            public Validation() { }
-            public Validation(
-                Int32 Id,
+            public Step() { }
+            public Step(
                 String Name,
-                String Description,
-                Boolean Fault
-                ) {
-                this.Id = Id;
+                String Caption,
+                Boolean IsValid,
+                Boolean IsActive,
+                List<Error> Errors,
+                List<Advisor> Advisors
+                )
+            {
                 this.Name = Name;
-                this.Description = Description;
-                this.Fault = Fault;
+                this.Caption = Caption;
+                this.IsValid = IsValid;
+                this.IsActive = IsActive;
+                this.Errors = Errors;
+                this.Advisors = Advisors;
             }
             #endregion
 
             [DataMember]
-            public Int32 Id;
-            [DataMember]
             public String Name;
             [DataMember]
-            public String Description;
+            public String Caption { get; set; }
             [DataMember]
-            public Boolean Fault;
+            public Boolean IsValid { get; set; }
+            [DataMember]
+            public Boolean IsActive { get; set; }
+            [DataMember]
+            public List<Advisor> Advisors;
+            [DataMember]
+            public List<Error> Errors;
+        }
+
+        [DataContract]
+        public class Advisor
+        {
+            #region Initialize...
+            public Advisor() { }
+            public Advisor(
+                Int32 SortId,
+                String Message
+                )
+            {
+                this.SortId = SortId;
+                this.Message = Message;
+            }
+            #endregion
+
+            [DataMember]
+            public Int32 SortId;
+            [DataMember]
+            public String Message;
+        }
+
+        [DataContract]
+        public class Error
+        {
+            #region Initialize...
+            public Error() { }
+            public Error(
+                String Message
+                )
+            {
+                this.Message = Message;
+            }
+            #endregion
+
+            [DataMember]
+            public String Message { get; set; }
         }
     }
 }

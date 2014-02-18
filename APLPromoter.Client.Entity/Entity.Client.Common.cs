@@ -114,17 +114,6 @@ namespace APLPromoter.Client.Entity
 
         #region Initialize...
         public Workflow() { }
-        public Workflow(
-            string caption,
-            WorkflowType workflowType,
-            List<Step> steps
-        ) 
-        {
-            this.IsWorkflowValid = false;
-            this.WorkflowType = workflowType;
-            this.Caption = caption;
-            this.Steps = steps;
-        }
         #endregion
 
         [DataMember]
@@ -140,8 +129,7 @@ namespace APLPromoter.Client.Entity
         public Step CurrentStep { get; set; }
         [DataMember]
         public Boolean IsWorkflowValid;
-        [DataMember]
-        public List<Validation> ValidationMessages;
+
 
 
 
@@ -191,14 +179,54 @@ namespace APLPromoter.Client.Entity
         [DataMember]
         public String Name;
         [DataMember]
-        public String Caption;
+        public String Caption { get; set; }
         [DataMember]
-        public Int32 Ordinal;
+        public Boolean IsValid { get; set; }
         [DataMember]
-        public Boolean IsValid;
+        public Boolean IsActive { get; set; }
+        [DataMember]
+        public List<Advisor> Advisors;
+        [DataMember]
+        public List<Error> Errors;
     }
 
+    [DataContract]
+    public class Advisor
+    {
+        #region Initialize...
+        public Advisor() { }
+        public Advisor(
+            Int32 SortId,
+            String Message
+            )
+        {
+            this.SortId = SortId;
+            this.Message = Message;
+        }
+        #endregion
 
+        [DataMember]
+        public Int32 SortId;
+        [DataMember]
+        public String Message;
+    }
+
+    [DataContract]
+    public class Error
+    {
+        #region Initialize...
+        public Error() { }
+        public Error(
+            String Message
+            )
+        {
+            this.Message = Message;
+        }
+        #endregion
+
+        [DataMember]
+        public String Message { get; set; }
+    }
 
 
     public enum Steps
