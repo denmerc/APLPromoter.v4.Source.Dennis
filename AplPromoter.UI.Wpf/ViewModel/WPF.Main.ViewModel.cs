@@ -3,10 +3,12 @@ using ReactiveUI;
 using System.Collections.ObjectModel;
 using System.Collections.Generic;
 using System.Linq;
+using System.ComponentModel.Composition;
 
 namespace APLPromoter.UI.Wpf.ViewModel
 {
 
+    [Export]
     public class MainViewModel : ReactiveObject, IRoutableViewModel
     {
 

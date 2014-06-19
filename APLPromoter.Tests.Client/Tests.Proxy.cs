@@ -43,7 +43,10 @@ namespace APLPromoter.Tests.Client
         {
             AnalyticClient proxy = new AnalyticClient();
             proxy.Open();
-
+            
+            
+            //TODO: catch faults to handle reconnect
+            //ie. subscribe to proxy.InnerChannel.Faulted
             Session<List<APLPromoter.Client.Entity.Analytic.Identity>> response = proxy.LoadList(new Session<APLPromoter.Client.Entity.NullT> { SqlKey = SQLKEYAPLADMIN });
 
             proxy.Close();

@@ -6,9 +6,11 @@ using System.Threading.Tasks;
 using APLPromoter.Client.Contracts;
 using System.ServiceModel;
 using APLPromoter.Client.Entity;
+using System.ComponentModel.Composition;
 
 namespace APLPromoter.Client
 {
+    [Export]
     public class AnalyticClient : ClientBase<IAnalyticService>, IAnalyticService
     {
         public Session<List<Client.Entity.Analytic.Identity>> LoadList(Session<Client.Entity.NullT> session)

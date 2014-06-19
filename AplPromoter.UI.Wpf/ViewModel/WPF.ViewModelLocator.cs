@@ -5,36 +5,73 @@ using APLPromoter.UI.Wpf.ViewModel;
 using APLPromoter.UI.Wpf.Views;
 using Ninject;
 using Ninject.Modules;
+using System.Collections.Generic;
+using System.ComponentModel.Composition.Hosting;
+using System.ComponentModel.Composition;
+using System.ComponentModel.Composition.Registration;
+using System.Reflection;
+using System.IO;
 
 namespace APLPromoter.UI.Wpf.ViewModel
 {
     public class ViewModelLocator
     {
+
+        public static CompositionContainer Container { get; set; }
         private static StandardKernel kernel = null;
         public ViewModelLocator()
         {
+            var conventions = new RegistrationBuilder();
+            conventions.ForType<MainViewModel>().Export<MainViewModel>().SetCreationPolicy(CreationPolicy.Shared);
+            conventions.ForType<ViewRouter>().Export<ViewRouter>().SetCreationPolicy(CreationPolicy.Shared);
+            conventions.ForType<IUserService>().Export<UserClient>().SetCreationPolicy(CreationPolicy.Shared);
+            conventions.ForType<IAnalyticService>().Export<AnalyticClient>().SetCreationPolicy(CreationPolicy.Shared);
+
+            var appCatalog = new AssemblyCatalog(typeof(App).Assembly, conventions);
+            var proxyCatalog = new AssemblyCatalog(typeof(APLPromoter.Client.AnalyticClient).Assembly, conventions);
+
             
-            //TODO: determine if in design mode and load mock data
-            //if (ViewModelBase.IsInDesignModeStatic) 
-            //{
-                // Create design time view services and models
-                //kernel = new StandardKernel(new APLPromoter.UI.Wpf.Modules.DesignTimeModules());
+            //var serviceCatalog = new AssemblyCatalog(typeof(APLPromoter.Client.Contracts.IUserService).Assembly, conventions);
+            //var dirCatalog = new DirectoryCatalog(@".");
+            //var dirCatalog = new DirectoryCatalog(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), 
+            //    "APLPromoter.Client.*.dll");
 
-            //}
-            //else
-            //{
-                // Create run time view services and models
-          
-                kernel = new StandardKernel(new APLPromoter.UI.Wpf.Modules.RunTimeModules()); //right now only production module
-            //}
 
+            //var aggregate = new AggregateCatalog(dirCatalog);
+            var aggregate = new AggregateCatalog(appCatalog, proxyCatalog);
+            //var aggregate = new AggregateCatalog(appCatalog, serviceCatalog, proxyCatalog);
+            Container = new CompositionContainer(aggregate);
+            
+            
+            //Container = new CompositionContainer(new AssemblyCatalog(typeof(App).Assembly, conventions));
+
+            Container.ComposeExportedValue("Version", "1.0");
+
+            //var batch = new CompositionBatch();
+            //batch.AddExportedValue("Version", "1.0");
+
+            Container.SatisfyImportsOnce(this, conventions);
+            
+            //Container.ComposeParts(this, conventions);
+            
+
+        }
+
+
+        public string Version
+        {
+            get
+            {
+                return Container.GetExportedValue<string>("Version");
+            }
         }
 
         public MainViewModel MainViewModel
         {
             get
             {
-                return kernel.Get<MainViewModel>();
+                return Container.GetExportedValue<MainViewModel>();
+                //return kernel.Get<MainViewModel>();
             }
         }
 
@@ -42,7 +79,7 @@ namespace APLPromoter.UI.Wpf.ViewModel
         {
             get
             {
-                return kernel.Get<ViewRouter>();
+                return Container.GetExportedValue<ViewRouter>();
             }
         }
 
@@ -50,7 +87,7 @@ namespace APLPromoter.UI.Wpf.ViewModel
         {
             get
             {
-                return kernel.Get<ViewModelLocator>();
+                return Container.GetExportedValue<ViewModelLocator>();
             }
         }
 
@@ -58,7 +95,7 @@ namespace APLPromoter.UI.Wpf.ViewModel
         {
             get
             {
-                return kernel.Get<IUserService>();
+                return Container.GetExportedValue<UserClient>();
             }
         }
 
@@ -66,7 +103,7 @@ namespace APLPromoter.UI.Wpf.ViewModel
         {
             get
             {
-                return kernel.Get<IAnalyticService>();
+                return Container.GetExportedValue<AnalyticClient>();
             }
         }
 
@@ -75,6 +112,7 @@ namespace APLPromoter.UI.Wpf.ViewModel
             // TODO Clear the ViewModels
         }
     }
+
 }
 
 

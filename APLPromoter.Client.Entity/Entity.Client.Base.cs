@@ -13,7 +13,8 @@ using System.Text;
 namespace APLPromoter.Client.Entity
 {
     //[DataContract]
-    public class ObjectBase : NotificationObject, IDataErrorInfo
+    public class 
+        ObjectBase : NotificationObject, IDataErrorInfo
     {
         protected IValidator _Validator;
         protected IEnumerable<ValidationFailure> _ValidationErrors = null;

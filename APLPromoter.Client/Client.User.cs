@@ -6,9 +6,11 @@ using System.Linq;
 using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
+using System.ComponentModel.Composition;
 
 namespace APLPromoter.Client
 {
+    [Export]
     public class UserClient : ClientBase<IUserService>, IUserService
     {
         public Session<Client.Entity.NullT> Initialize(Session<Client.Entity.NullT> session)

@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media;
 using System.Linq;
+using System.ComponentModel.Composition;
 
 
 namespace APLPromoter.UI.Wpf.ViewModel
@@ -15,6 +16,11 @@ namespace APLPromoter.UI.Wpf.ViewModel
     public class LoginViewModel : ReactiveObject , IRoutableViewModel
     {
         //APLPromoter.Client.UserClient _proxy = new APLPromoter.Client.UserClient();
+        //TODO:[ImportingConstuctor]
+
+        [Import]
+        public IUserService TheUserService;
+
         public LoginViewModel(IScreen hostScreen, MainViewModel appRootViewModel, 
                                 IUserService userService)
         {
